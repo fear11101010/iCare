@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@drawable/list_item_background"
+    android:orientation="horizontal"
+
+    android:padding="2dp">
+
+    <ImageView
+        android:id="@+id/profileImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentTop="true"
+        android:background="#FFFFFF"
+        android:padding="15dp"
+        android:src="@drawable/profile_icon" />
+
+    <TextView
+        android:id="@+id/textView"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
+        android:layout_toLeftOf="@+id/goDetail"
+        android:layout_toRightOf="@+id/profileImage"
+        android:padding="15dp"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="#3D3C3A" />
+
+    <ImageButton
+        android:id="@+id/goDetail"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentTop="true"
+        android:background="@android:drawable/screen_background_light_transparent"
+        android:padding="15dp"
+        android:src="@drawable/go_button_drawable" />
+
+</RelativeLayout>
+
