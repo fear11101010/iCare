@@ -85,6 +85,14 @@ public class CreateProfileActivity extends AppCompatActivity {
             Toast.makeText(this, "Date of birth can not be empty", Toast.LENGTH_LONG).show();
             return;
         }
+        if (!ProfileValidation.validateWeight(weight.getText().toString())){
+            Toast.makeText(this, "Weight Invalid", Toast.LENGTH_LONG).show();
+            return;
+        }
+        if (!ProfileValidation.validateHeight(height.getText().toString())){
+            Toast.makeText(this, "Height Invalid", Toast.LENGTH_LONG).show();
+            return;
+        }
         Profile profile = new Profile();
         profile.setBloodGroup(bloodGroup.getSelectedItem().toString());
         profile.setProfileName(profileName.getText().toString());
