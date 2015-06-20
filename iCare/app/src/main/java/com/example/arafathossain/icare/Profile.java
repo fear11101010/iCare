@@ -13,8 +13,10 @@ public class Profile {
     private String bloodGroup;
     private String dateOfBirth;
     private String gender;
+    private int id;
 
-    public Profile(String profileName, String userName, String email, String contactNo, String height, String weight, String bloodGroup, String dateOfBirth,String gender) {
+    public Profile(int id,String profileName, String userName, String email, String contactNo, String height, String weight, String bloodGroup, String dateOfBirth,String gender) {
+        this.id = id;
         this.profileName = profileName;
         this.userName = userName;
         this.email = email;
@@ -27,6 +29,14 @@ public class Profile {
     }
 
     public Profile() {
+    }
+
+    public int getId() {
+        return id;
+    }
+
+    public void setId(int id) {
+        this.id = id;
     }
 
     public String getGender() {

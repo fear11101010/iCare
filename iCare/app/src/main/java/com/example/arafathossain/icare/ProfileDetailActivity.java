@@ -1,6 +1,7 @@
 package com.example.arafathossain.icare;
 
 import android.os.Bundle;
+import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
@@ -13,30 +14,34 @@ import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ListView;
-import android.widget.RelativeLayout;
 import android.widget.Toast;
 
 import com.example.arafathossain.adapter.NavListAdaper;
+import com.example.arafathossain.fragment.CreateDietFragment;
 import com.example.arafathossain.fragment.DietInformationFragment;
 import com.example.arafathossain.fragment.GeneralInformationFragment;
 import com.example.arafathossain.fragment.HomeProfileDetailFragment;
+import com.example.arafathossain.interfacee.OnDietCreateListener;
 import com.example.arafathossain.interfacee.OnMenuItemClickListener;
 
-public class ProfileDetailActivity extends AppCompatActivity implements HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener {
+public class ProfileDetailActivity extends AppCompatActivity implements HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
     DrawerLayout drawerLayout;
     private static final int HOME_FRAGMENT = 1;
     private static final int DIET_FRAGMENT = 2;
+    private static final int CREATE_DIET_FRAGMENT = 4;
     private static final int GENERAL_FRAGMENT = 3;
     private static final int EDIT_MODE = 4;
     private static final int SAVE_MODE = 5;
     private static final String HOME_FRAGMENT_TAG = "homeFragment";
     private static final String DIET_FRAGMENT_TAG = "dietFragment";
+    private static final String CREATE_DIET_FRAGMENT_TAG = "createDietFragment";
     private static final String GENERAL_FRAGMENT_TAG = "generalFragment";
     private static final String VACCINATION_FRAGMENT_TAG = "vaccinationFragment";
     private static final String HISTORY_FRAGMENT_TAG = "historyFragment";
     private int which;
     private int mode;
     private OnMenuItemClickListener menuItemClickListener;
+    private OnDietCreateListener onDietCreateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -47,7 +52,6 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
         toolbar.setLogo(R.mipmap.icare_icon);
         toolbar.setNavigationIcon(R.drawable.nevigation_icon);
         setSupportActionBar(toolbar);
-        getSupportActionBar().setHomeButtonEnabled(true);
         drawerLayout = (DrawerLayout) findViewById(R.id.drawerLayout);
         ActionBarDrawerToggle drawerToggle = new ActionBarDrawerToggle(this, drawerLayout, toolbar, R.string.app_name, R.string.app_name);
         drawerLayout.setDrawerListener(drawerToggle);
@@ -65,7 +69,6 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
     public boolean onCreateOptionsMenu(Menu menu) {
         // Inflate the menu; this adds items to the action bar if it is present.
         int resMenu = R.menu.menu_profile_detail;
-        Fragment fragment = getSupportFragmentManager().findFragmentById(R.id.fragmentContainer);
         switch (which) {
             case HOME_FRAGMENT:
                 resMenu = R.menu.menu_profile_detail;
@@ -78,22 +81,20 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
                 break;
         }
         getMenuInflater().inflate(resMenu, menu);
-        if (which==GENERAL_FRAGMENT) {
+        if (which == GENERAL_FRAGMENT) {
             MenuItem editItem = menu.getItem(0);
             MenuItem saveItem = menu.getItem(1);
-            if (mode==SAVE_MODE){
+            if (mode == SAVE_MODE) {
                 editItem.setVisible(false);
                 saveItem.setVisible(true);
 
 
-            }
-            else if (mode==EDIT_MODE){
+            } else if (mode == EDIT_MODE) {
                 editItem.setVisible(true);
                 saveItem.setVisible(false);
             }
         }
 
-        //Toast.makeText(this,which+"",Toast.LENGTH_LONG).show();
         return true;
     }
 
@@ -104,7 +105,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
         // as you specify a parent activity in AndroidManifest.xml.
         int id = item.getItemId();
 
-        switch (id){
+        switch (id) {
             case R.id.save:
                 mode = EDIT_MODE;
                 menuItemClickListener.onMenuItemClick(item);
@@ -115,6 +116,9 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
                 menuItemClickListener.onMenuItemClick(item);
                 invalidateOptionsMenu();
                 break;
+            case R.id.addDiet:
+                showCreateDietFragment(getIntent().getStringExtra("profileName"));
+                break;
         }
 
         return super.onOptionsItemSelected(item);
@@ -124,10 +128,8 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
     @Override
     public void onBackPressed() {
         int count = getSupportFragmentManager().getBackStackEntryCount();
-        //Toast.makeText(this,count+"",Toast.LENGTH_LONG).show();
         if (count > 0) {
             FragmentManager.BackStackEntry entry = getSupportFragmentManager().getBackStackEntryAt(count - 1);
-            Toast.makeText(this,entry.getName(),Toast.LENGTH_LONG).show();
             if (entry.getName().equalsIgnoreCase(HOME_FRAGMENT_TAG)) {
 
                 which = HOME_FRAGMENT;
@@ -135,15 +137,16 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
             } else if (entry.getName().equalsIgnoreCase(DIET_FRAGMENT_TAG)) {
                 which = HOME_FRAGMENT;
                 invalidateOptionsMenu();
-            }
-            else if (entry.getName().equalsIgnoreCase(GENERAL_FRAGMENT_TAG)) {
+            } else if (entry.getName().equalsIgnoreCase(GENERAL_FRAGMENT_TAG)) {
                 which = HOME_FRAGMENT;
+                invalidateOptionsMenu();
+            } else if (entry.getName().equalsIgnoreCase(CREATE_DIET_FRAGMENT_TAG)) {
+                which = DIET_FRAGMENT;
                 invalidateOptionsMenu();
             }
         }
         mode = EDIT_MODE;
         super.onBackPressed();
-        //Toast.makeText(this,getSupportFragmentManager().findFragmentById(R.id.fragmentContainer).getClass().getSimpleName(),Toast.LENGTH_LONG).show();
     }
 
     public void initializeHomeFragment(String profileName) {
@@ -191,6 +194,13 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
         fragmentTransaction.commit();
         which = DIET_FRAGMENT;
         invalidateOptionsMenu();
+        onDietCreateListener = (OnDietCreateListener) dietFragment;
+    }
+
+    public void showCreateDietFragment(String profileName) {
+        DialogFragment dietFragment = CreateDietFragment.getInstance(profileName);
+        dietFragment.show(getSupportFragmentManager(), CREATE_DIET_FRAGMENT_TAG);
+
     }
 
     public void showDoctorFragment() {
@@ -212,7 +222,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
         fragmentTransaction.commit();
         which = GENERAL_FRAGMENT;
         invalidateOptionsMenu();
-        menuItemClickListener = (OnMenuItemClickListener)generalFragment;
+        menuItemClickListener = (OnMenuItemClickListener) generalFragment;
     }
 
     public void showGrowthFragment() {
@@ -261,5 +271,10 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
                 drawerLayout.closeDrawers();
                 break;
         }
+    }
+
+    @Override
+    public void onCreateDiet() {
+        onDietCreateListener.onCreateDiet();
     }
 }

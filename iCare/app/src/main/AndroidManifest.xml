@@ -6,7 +6,7 @@
         android:allowBackup="true"
         android:icon="@mipmap/icare_icon"
         android:label="@string/app_name"
-        android:name=".DatabaseApplication"
+        android:name=".ApplicationMain"
         android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
@@ -18,12 +18,13 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".CreateProfileAcivity"
+            android:name=".CreateProfileActivity"
             android:label="@string/new_profile_activity" />
         <activity
             android:name=".ProfileDetailActivity"
              >
         </activity>
+        <receiver android:name=".AlarmReceiver"/>
     </application>
 
 </manifest>

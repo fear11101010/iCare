@@ -53,5 +53,14 @@
         <item>@drawable/medical_history_icon</item>
         <item>@drawable/remove_profile</item>
     </integer-array>
+    <string-array name="weekDay">
+        <item>Saturday</item>
+        <item>Sunday</item>
+        <item>Monday</item>
+        <item>Tuesday</item>
+        <item>Wednesday</item>
+        <item>Thursday</item>
+        <item>Friday</item>
+    </string-array>
     <string name="title_activity_profile_detail">ProfileDetailActivity</string>
 </resources>

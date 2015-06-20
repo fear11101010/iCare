@@ -3,7 +3,6 @@ package com.example.arafathossain.fragment;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MenuItem;
 import android.view.View;
@@ -14,7 +13,7 @@ import android.widget.RadioGroup;
 import android.widget.Spinner;
 import android.widget.Toast;
 
-import com.example.arafathossain.icare.DatabaseApplication;
+import com.example.arafathossain.icare.ApplicationMain;
 import com.example.arafathossain.icare.Profile;
 import com.example.arafathossain.icare.R;
 import com.example.arafathossain.interfacee.OnMenuItemClickListener;
@@ -74,7 +73,7 @@ public class GeneralInformationFragment extends Fragment implements OnMenuItemCl
     }
 
     public void setValue() {
-        Profile profile = DatabaseApplication.getDatabase().getProfileByName(getArguments().getString("profileTitle"));
+        Profile profile = ApplicationMain.getDatabase().getProfileByName(getArguments().getString("profileTitle"));
         int position = Arrays.binarySearch(getActivity().getResources().getStringArray(R.array.bloodGroupList), profile.getBloodGroup());
         bloodGroup.setSelection(position);
         profileName.setText(profile.getProfileName());
@@ -101,6 +100,10 @@ public class GeneralInformationFragment extends Fragment implements OnMenuItemCl
 
     }
     public void updateProfile(){
-
+        if (ApplicationMain.getDatabase().checkProfileName(profileName.getText().toString())){
+            Toast.makeText(getActivity(),"Profile name already exists",Toast.LENGTH_LONG).show();
+            return;
+        }
     }
+
 }
