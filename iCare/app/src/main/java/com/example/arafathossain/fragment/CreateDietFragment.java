@@ -5,7 +5,7 @@ import android.app.AlarmManager;
 import android.app.AlertDialog;
 import android.app.Dialog;
 import android.app.PendingIntent;
-import android.content.Context;
+import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
@@ -24,11 +24,13 @@ import android.widget.Toast;
 import com.example.arafathossain.adapter.FoodAdapter;
 import com.example.arafathossain.icare.AlarmReceiver;
 import com.example.arafathossain.icare.ApplicationMain;
+import com.example.arafathossain.icare.DatabaseHelper;
 import com.example.arafathossain.icare.DietInformation;
 import com.example.arafathossain.icare.R;
 import com.example.arafathossain.interfacee.OnDietCreateListener;
 
 import java.text.SimpleDateFormat;
+import java.util.Arrays;
 import java.util.Calendar;
 
 
@@ -79,6 +81,8 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
         title.setOnClickListener(this);
         menu.setOnClickListener(this);
         reminder.setOnClickListener(this);
+        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
+        builder.setView(view);
         if (dietInformation != null) {
             timeView.setText(dietInformation.getTime());
             titleView.setText(dietInformation.getTitle());
@@ -94,21 +98,32 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
                 reminder.setChecked(false);
                 reminder.setCheckMarkDrawable(android.R.drawable.checkbox_off_background);
             }
+            builder.setPositiveButton("Update", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    updateDietInformation();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
+        } else {
+            builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    saveDietInformation();
+                }
+            });
+            builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
+                @Override
+                public void onClick(DialogInterface dialog, int which) {
+                    dialog.dismiss();
+                }
+            });
         }
-        AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-        builder.setView(view);
-        builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                saveDietInformation();
-            }
-        });
-        builder.setNegativeButton("Cancel", new DialogInterface.OnClickListener() {
-            @Override
-            public void onClick(DialogInterface dialog, int which) {
-                dialog.dismiss();
-            }
-        });
         return builder.create();
     }
 
@@ -202,10 +217,13 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
         foodName = (EditText) view.findViewById(R.id.foodName);
         foodList = (ListView) view.findViewById(R.id.foodList);
         String foods = menuView.getText().toString();
-        if (foods == null || foods.isEmpty() || foods.equalsIgnoreCase("Not set"))
-            foodAdapter = new FoodAdapter(getActivity());
-        else foodAdapter = new FoodAdapter(getActivity(), foods.split(","));
+        foodAdapter = new FoodAdapter(getActivity());
+        if (foods != null && !foods.isEmpty() && !foods.equalsIgnoreCase("Not set")) {
+            foodAdapter.addAll(Arrays.asList(foods.split(",")));
+            foodAdapter.notifyDataSetChanged();
+        }
         foodList.setAdapter(foodAdapter);
+
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
         builder.setPositiveButton("Save", new DialogInterface.OnClickListener() {
@@ -266,53 +284,85 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
                 Toast.makeText(getActivity(), "Unable to add diet information", Toast.LENGTH_LONG).show();
                 return;
             }
-            if (reminder.isChecked()) setReminder(timeView.getText().toString(),s,i);
+            if (reminder.isChecked()) setReminder(timeView.getText().toString(), s, i);
         }
         onDietCreateListener.onCreateDiet();
         Toast.makeText(getActivity(), "Insert Complete", Toast.LENGTH_LONG).show();
     }
-    public void setReminder(String time,String day,int id){
+
+    public void updateDietInformation() {
+        String timeText = timeView.getText().toString();
+        String titleText = titleView.getText().toString();
+        String menuText = menuView.getText().toString();
+        String repeatText = repeatView.getText().toString();
+        String reminderText = reminder.isChecked() ? "yes" : "no";
+        ContentValues values = new ContentValues();
+        if (!dietInformation.getTime().equalsIgnoreCase(timeText)) {
+            if (timeText.equalsIgnoreCase("Not set")) {
+                Toast.makeText(getActivity(), "Set time first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            values.put(DatabaseHelper.DietTable.COLUMN_TIME, timeText);
+        }
+        if (!dietInformation.getTitle().equalsIgnoreCase(titleText)) {
+            if (titleText.equalsIgnoreCase("Not set")) {
+                Toast.makeText(getActivity(), "Set title first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            values.put(DatabaseHelper.DietTable.COLUMN_TITLE, titleText);
+        }
+        if (!dietInformation.getMenu().equalsIgnoreCase(menuText)) {
+            if (menuText.equalsIgnoreCase("Not set")) {
+                Toast.makeText(getActivity(), "Set menu first", Toast.LENGTH_LONG).show();
+                return;
+            }
+            values.put(DatabaseHelper.DietTable.COLUMN_MENU, menuText);
+        }
+        if (!dietInformation.getReminder().equalsIgnoreCase(reminderText)) {
+            values.put(DatabaseHelper.DietTable.COLUMN_REMINDER, reminderText);
+        }
+        if (values.size() <= 0) {
+            Toast.makeText(getActivity(), "Update complete", Toast.LENGTH_LONG).show();
+        } else if (ApplicationMain.getDatabase().updateDiet(values, dietInformation.getId()) > 0) {
+            Toast.makeText(getActivity(), "Update complete", Toast.LENGTH_LONG).show();
+        } else Toast.makeText(getActivity(), "Unable to update", Toast.LENGTH_LONG).show();
+    }
+
+    public void setReminder(String time, String day, int id) {
         String[] values = time.split(" |:");
         Calendar calendar = Calendar.getInstance();
         long currentTimeInMills = calendar.getTimeInMillis();
-        calendar.set(Calendar.HOUR,Integer.parseInt(values[0]));
-        calendar.set(Calendar.MINUTE,Integer.parseInt(values[1]));
+        calendar.set(Calendar.HOUR, Integer.parseInt(values[0]));
+        calendar.set(Calendar.MINUTE, Integer.parseInt(values[1]));
         if (values[2].equalsIgnoreCase("AM")) {
             calendar.set(Calendar.AM_PM, Calendar.AM);
-        }
-        else calendar.set(Calendar.AM_PM,Calendar.PM);
-        if (day.equalsIgnoreCase("sunday")){
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.SUNDAY);
-        }
-        else if (day.equalsIgnoreCase("monday")){
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.MONDAY);
-        }
-        else if (day.equalsIgnoreCase("tuesday")){
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.TUESDAY);
-        }
-        else if (day.equalsIgnoreCase("wednesday")){
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.WEDNESDAY);
-        }
-        else if (day.equalsIgnoreCase("thursday")){
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.THURSDAY);
-        }
-        else if (day.equalsIgnoreCase("friday")){
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.FRIDAY);
-        }
-        else{
-            calendar.set(Calendar.DAY_OF_WEEK,Calendar.SATURDAY);
+        } else calendar.set(Calendar.AM_PM, Calendar.PM);
+        if (day.equalsIgnoreCase("sunday")) {
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SUNDAY);
+        } else if (day.equalsIgnoreCase("monday")) {
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.MONDAY);
+        } else if (day.equalsIgnoreCase("tuesday")) {
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.TUESDAY);
+        } else if (day.equalsIgnoreCase("wednesday")) {
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.WEDNESDAY);
+        } else if (day.equalsIgnoreCase("thursday")) {
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.THURSDAY);
+        } else if (day.equalsIgnoreCase("friday")) {
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.FRIDAY);
+        } else {
+            calendar.set(Calendar.DAY_OF_WEEK, Calendar.SATURDAY);
         }
         long reminderTimeInMills = calendar.getTimeInMillis();
-        if (reminderTimeInMills<currentTimeInMills){
-            reminderTimeInMills += 7*24*60*60*1000;
-            Log.d("reminder","less");
+        if (reminderTimeInMills < currentTimeInMills) {
+            reminderTimeInMills += 7 * 24 * 60 * 60 * 1000;
+            Log.d("reminder", "less");
         }
 
         Intent alarmReceiver = new Intent(getActivity(), AlarmReceiver.class);
-        alarmReceiver.putExtra("title",titleView.getText());
-        alarmReceiver.putExtra("day",repeatView.getText());
-        alarmReceiver.putExtra("menu",menuView.getText());
-        PendingIntent dietIntent = PendingIntent.getBroadcast(getActivity(),id,alarmReceiver,0);
+        alarmReceiver.putExtra("title", titleView.getText());
+        alarmReceiver.putExtra("day", repeatView.getText());
+        alarmReceiver.putExtra("menu", menuView.getText());
+        PendingIntent dietIntent = PendingIntent.getBroadcast(getActivity(), id, alarmReceiver, 0);
         ApplicationMain.getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP, reminderTimeInMills, 7 * 24 * 60 * 60 * 1000, dietIntent);
     }
 

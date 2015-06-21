@@ -12,9 +12,7 @@ import com.example.arafathossain.adapter.DietPagerAdapter;
 import com.example.arafathossain.icare.R;
 import com.example.arafathossain.interfacee.OnDietCreateListener;
 
-/**
- * Created by Arafat Hossain on 6/11/2015.
- */
+
 public class DietInformationFragment extends Fragment implements OnDietCreateListener {
     DietPagerAdapter dietPagerAdapter;
     ViewPager viewPager;
@@ -25,18 +23,6 @@ public class DietInformationFragment extends Fragment implements OnDietCreateLis
         DietInformationFragment dietFragment = new DietInformationFragment();
         dietFragment.setArguments(bundle);
         return dietFragment;
-    }
-
-    public static DietInformationFragment getInstance() {
-        return new DietInformationFragment();
-
-    }
-
-    @Override
-    public void onCreate(@Nullable Bundle savedInstanceState) {
-        super.onCreate(savedInstanceState);
-
-
     }
 
     @Nullable

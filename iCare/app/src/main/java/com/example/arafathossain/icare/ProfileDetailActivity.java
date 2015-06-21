@@ -1,5 +1,7 @@
 package com.example.arafathossain.icare;
 
+import android.app.PendingIntent;
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.v4.app.DialogFragment;
 import android.support.v4.app.Fragment;
@@ -23,6 +25,8 @@ import com.example.arafathossain.fragment.GeneralInformationFragment;
 import com.example.arafathossain.fragment.HomeProfileDetailFragment;
 import com.example.arafathossain.interfacee.OnDietCreateListener;
 import com.example.arafathossain.interfacee.OnMenuItemClickListener;
+
+import java.util.ArrayList;
 
 public class ProfileDetailActivity extends AppCompatActivity implements HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
     DrawerLayout drawerLayout;
@@ -127,6 +131,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
 
     @Override
     public void onBackPressed() {
+        drawerLayout.closeDrawers();
         int count = getSupportFragmentManager().getBackStackEntryCount();
         if (count > 0) {
             FragmentManager.BackStackEntry entry = getSupportFragmentManager().getBackStackEntryAt(count - 1);
@@ -147,6 +152,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
         }
         mode = EDIT_MODE;
         super.onBackPressed();
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 
     public void initializeHomeFragment(String profileName) {
@@ -234,7 +240,22 @@ public class ProfileDetailActivity extends AppCompatActivity implements HomeProf
     }
 
     public void removeProfile() {
-
+        ArrayList<Integer> idList = ApplicationMain.getDatabase().getAllDietIdByProfileName(getIntent().getStringExtra("profileName"));
+        int row = ApplicationMain.getDatabase().removeProfile(getIntent().getStringExtra("profileName"));
+        if (row > 0) {
+            if (idList != null)
+                for (int i : idList) {
+                    PendingIntent alarmIntent = PendingIntent.getBroadcast(this, i, new Intent(this, AlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                    ApplicationMain.getAlarmManager().cancel(alarmIntent);
+                }
+            Toast.makeText(this, "Profile Delete Complete", Toast.LENGTH_LONG).show();
+            Intent intent = new Intent();
+            intent.putExtra("profileName", getIntent().getStringExtra("profileName"));
+            setResult(RESULT_OK, intent);
+            finish();
+        } else {
+            Toast.makeText(this, "Unable to Delete Profile Complete", Toast.LENGTH_LONG).show();
+        }
     }
 
     @Override

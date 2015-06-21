@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.SQLException;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
+import android.util.Log;
 
 import java.util.ArrayList;
 
@@ -88,19 +89,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return 1;
     }
 
-    public int updateProfile(Profile profile, int id) {
+    public int removeProfile(String profileName) {
         SQLiteDatabase db = getWritableDatabase();
-        ContentValues values = new ContentValues();
-        values.put(ProfileTable.COLUMN_PROFILE_NAME, profile.getProfileName());
-        values.put(ProfileTable.COLUMN_USER_NAME, profile.getUserName());
-        values.put(ProfileTable.COLUMN_EMAIL, profile.getEmail());
-        values.put(ProfileTable.COLUMN_CONTACT_NO, profile.getContactNo());
-        values.put(ProfileTable.COLUMN_DATE_OF_BIRTH, profile.getDateOfBirth());
-        values.put(ProfileTable.COLUMN_WEIGHT, profile.getWeight());
-        values.put(ProfileTable.COLUMN_HEIGHT, profile.getHeight());
-        values.put(ProfileTable.COLUMN_BLOOD_GROUP, profile.getBloodGroup());
-        values.put(ProfileTable.COLUMN_GENDER, profile.getGender());
+        int row = db.delete(ProfileTable.TABLE_NAME, ProfileTable.COLUMN_PROFILE_NAME + "=?", new String[]{profileName});
+        int row1 = db.delete(DietTable.TABLE_NAME, DietTable.COLUMN_PROFILE_NAME + "=?", new String[]{profileName});
+        if (row>0&&row1>0) return 1;
+        return 0;
+    }
 
+    public ArrayList<Integer> getAllDietIdByProfileName(String profileName) {
+        SQLiteDatabase db = getReadableDatabase();
+        ArrayList<Integer> idList = null;
+        Cursor cursor = db.query(DietTable.TABLE_NAME, new String[]{DietTable.COLUMN_ID}, DietTable.COLUMN_PROFILE_NAME + "=?", new String[]{profileName}, null, null, null);
+        if (cursor.moveToFirst()) {
+            idList = new ArrayList<Integer>();
+            do {
+                idList.add(cursor.getInt(cursor.getColumnIndex(DietTable.COLUMN_ID)));
+            } while (cursor.moveToNext());
+            Log.d("sizeid",idList.size()+"");
+        }
+        return idList;
+    }
+
+    public int updateProfile(ContentValues values, int id) {
+        SQLiteDatabase db = getWritableDatabase();
         return db.update(ProfileTable.TABLE_NAME, values, "_id=?", new String[]{String.valueOf(id)});
     }
 
@@ -126,6 +138,11 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         return i;
     }
 
+    public int updateDiet(ContentValues values, int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.update(DietTable.TABLE_NAME, values, DietTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
+    }
+
     public ArrayList<DietInformation> getDietList(String weekDay, String profileName) {
         ArrayList<DietInformation> dietList = null;
         SQLiteDatabase db = getReadableDatabase();
@@ -146,9 +163,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return dietList;
     }
-    public int removeDiet(int id){
+
+    public int removeDiet(int id) {
         SQLiteDatabase db = getWritableDatabase();
-        int numRow = db.delete(DietTable.TABLE_NAME,DietTable.COLUMN_ID+"=?",new String[]{String.valueOf(id)});
+        int numRow = db.delete(DietTable.TABLE_NAME, DietTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
         return numRow;
     }
 

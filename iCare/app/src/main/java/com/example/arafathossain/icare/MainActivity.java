@@ -9,15 +9,19 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ArrayAdapter;
+import android.widget.Button;
 import android.widget.ImageButton;
 import android.widget.ListView;
 import android.widget.TextView;
 
 import java.util.ArrayList;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements View.OnClickListener {
 
     private ListView profileList;
+    private View noProfileView;
+
+    private Button addProfile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -28,6 +32,9 @@ public class MainActivity extends AppCompatActivity {
         toolbar.setLogo(R.mipmap.icare_icon);
         setSupportActionBar(toolbar);
         profileList = (ListView) findViewById(R.id.profileList);
+        noProfileView = findViewById(R.id.noProfile);
+        addProfile = (Button) findViewById(R.id.add);
+        addProfile.setOnClickListener(this);
         setProfileAdapter();
 
     }
@@ -50,7 +57,7 @@ public class MainActivity extends AppCompatActivity {
         if (id == R.id.newProfile) {
             Intent newProfileActivity = new Intent(this, CreateProfileActivity.class);
             startActivityForResult(newProfileActivity, 1);
-
+            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
         }
 
         return super.onOptionsItemSelected(item);
@@ -58,8 +65,16 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onActivityResult(int requestCode, int resultCode, Intent data) {
-        if (resultCode == RESULT_OK) {
+        if (resultCode == RESULT_OK && requestCode == 1) {
             setProfileAdapter();
+        } else if (requestCode == 2 && resultCode == RESULT_OK) {
+            ArrayAdapter<String> adapter = (ArrayAdapter<String>) profileList.getAdapter();
+            adapter.remove(data.getStringExtra("profileName"));
+            adapter.notifyDataSetChanged();
+            if (adapter.getCount() == 0) {
+                profileList.setVisibility(View.GONE);
+                noProfileView.setVisibility(View.VISIBLE);
+            }
         }
     }
 
@@ -76,13 +91,26 @@ public class MainActivity extends AppCompatActivity {
                         public void onClick(View v) {
                             Intent detailIntent = new Intent(MainActivity.this, ProfileDetailActivity.class);
                             detailIntent.putExtra("profileName", ((TextView) view.findViewById(R.id.textView)).getText());
-                            startActivity(detailIntent);
+                            startActivityForResult(detailIntent, 2);
+                            overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                         }
                     });
                     return view;
                 }
             };
             profileList.setAdapter(profileAdapter);
+            profileList.setVisibility(View.VISIBLE);
+            noProfileView.setVisibility(View.GONE);
+        } else {
+            profileList.setVisibility(View.GONE);
+            noProfileView.setVisibility(View.VISIBLE);
         }
+    }
+
+    @Override
+    public void onClick(View v) {
+        Intent newProfileActivity = new Intent(this, CreateProfileActivity.class);
+        startActivityForResult(newProfileActivity, 1);
+        overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
     }
 }
