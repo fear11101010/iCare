@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    app:theme="@style/Base.ThemeOverlay.AppCompat.Light"
+    app:popupTheme="@style/Base.ThemeOverlay.AppCompat.Light"
+    android:gravity="center"
+    app:contentInsetLeft="0dp"
+    app:contentInsetRight="0dp"
+    app:contentInsetEnd="0dp"
+    app:contentInsetStart="0dp"
+    android:id="@+id/toolBar"
+    android:background="#FFFFFF">
+    <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+        android:orientation="vertical" android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="#FFFFFF">
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/title"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="15dp"
+            android:textColor="#96ab7e"
+            android:background="#FFFFFF"/>
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:id="@+id/time"
+            android:textAppearance="?android:attr/textAppearanceMedium"
+            android:paddingLeft="15dp"
+            android:paddingTop="8dp"
+            android:paddingBottom="8dp"
+            android:paddingRight="15dp"
+            android:textColor="#96ab7e"
+            android:background="#FFFFFF"/>
+
+    </LinearLayout>
+
+</android.support.v7.widget.Toolbar>
