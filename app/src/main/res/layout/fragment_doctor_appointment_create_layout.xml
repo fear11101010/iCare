@@ -4,45 +4,110 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <ListView
-        android:id="@+id/appointmentList"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_alignParentTop="true" />
+    <LinearLayout
+        android:id="@+id/dn"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:background="@drawable/layout_background_drawable"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="Doctor Name"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#7E354D" />
+
+        <TextView
+            android:id="@+id/doctorName"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="Not set"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/dc"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dn"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layout_background_drawable"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="Doctor Chamber"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#7E354D" />
+
+        <TextView
+            android:id="@+id/doctorChamber"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="Not set"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
+
+    <CheckedTextView
+        android:id="@+id/reminder"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dc"
+        android:layout_marginTop="8dp"
+        android:background="@drawable/layout_background_drawable"
+        android:checkMark="@android:drawable/checkbox_off_background"
+        android:gravity="center_vertical"
+        android:text="Reminder"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="#7E354D" />
 
     <LinearLayout
         android:id="@+id/newAppointment"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/reminder"
+        android:layout_marginTop="8dp"
         android:background="@drawable/button_layout_background"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center_horizontal"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:clickable="true"
-
-        android:focusable="true">
+        android:paddingTop="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/add_icon"
             android:clickable="false"
             android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:focusableInTouchMode="false"
+            android:src="@drawable/save" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:paddingBottom="8dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="8dp"
-            android:textColor="#FFFFFF"
-            android:text="New Appointment"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:text="Save Appointment"
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </RelativeLayout>
