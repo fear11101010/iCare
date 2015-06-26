@@ -4,13 +4,11 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentStatePagerAdapter;
 
-import com.astuetz.PagerSlidingTabStrip;
-import com.example.arafathossain.fragment.DietItemFragment;
 import com.example.arafathossain.fragment.DoctorAppointmentFragment;
 import com.example.arafathossain.fragment.DoctorProfileFragment;
 
 
-public class DoctorPagerAdapter extends FragmentStatePagerAdapter{
+public class DoctorPagerAdapter extends FragmentStatePagerAdapter {
     private static final String[] TITLE = {"Appointment Schedule", "Doctor Profile"};
     private static final int SIZE = 2;
 
@@ -41,6 +39,5 @@ public class DoctorPagerAdapter extends FragmentStatePagerAdapter{
     public CharSequence getPageTitle(int position) {
         return TITLE[position];
     }
-
 
 }

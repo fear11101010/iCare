@@ -20,6 +20,7 @@ import android.widget.Toast;
 
 import com.example.arafathossain.adapter.NavListAdaper;
 import com.example.arafathossain.fragment.CreateDietFragment;
+import com.example.arafathossain.fragment.CreateDoctorProfileFragment;
 import com.example.arafathossain.fragment.DietInformationFragment;
 import com.example.arafathossain.fragment.DoctorManagementFragment;
 import com.example.arafathossain.fragment.GeneralInformationFragment;
@@ -260,6 +261,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements OnUpdate
                 }
             Toast.makeText(this, "Profile Delete Complete", Toast.LENGTH_LONG).show();
             Intent intent = new Intent();
+            intent.putExtra("profileId", getIntent().getStringExtra("profileId"));
             intent.putExtra("profileName", getIntent().getStringExtra("profileName"));
             setResult(RESULT_OK, intent);
             finish();
@@ -317,5 +319,17 @@ public class ProfileDetailActivity extends AppCompatActivity implements OnUpdate
     public void onUpdate() {
         mode = EDIT_MODE;
         invalidateOptionsMenu();
+    }
+    public void createProfile(View v) {
+        Fragment fragment = new CreateDoctorProfileFragment();
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer,fragment);
+        fragmentTransaction.addToBackStack("doctorCreateProfile");
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.commit();
+    }
+    public void showDoctorCreateProfile(View v){
+
     }
 }

@@ -14,15 +14,44 @@ import com.example.arafathossain.icare.R;
 
 
 public class DoctorManagementFragment extends Fragment {
+    ViewPager doctorPager;
+    PagerSlidingTabStrip tabs;
+    int currentPage;
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_layout, container, false);
-        final PagerSlidingTabStrip tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
-        ViewPager doctorPager = (ViewPager) view.findViewById(R.id.doctorPager);
+        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
+        doctorPager = (ViewPager) view.findViewById(R.id.doctorPager);
+
         doctorPager.setAdapter(new DoctorPagerAdapter(getActivity().getSupportFragmentManager()));
         tabs.setViewPager(doctorPager);
+        tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
+            @Override
+            public void onPageScrolled(int i, float v, int i1) {
 
+            }
+
+            @Override
+            public void onPageSelected(int i) {
+                currentPage = i;
+            }
+
+            @Override
+            public void onPageScrollStateChanged(int i) {
+
+            }
+        });
         return view;
     }
+
+    @Override
+    public void onResume() {
+        super.onResume();
+        doctorPager.setAdapter(new DoctorPagerAdapter(getActivity().getSupportFragmentManager()));
+        doctorPager.setCurrentItem(currentPage);
+    }
+
+
 }
