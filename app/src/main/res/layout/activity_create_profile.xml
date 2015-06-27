@@ -22,32 +22,6 @@
             android:paddingTop="@dimen/activity_vertical_margin"
             android:scrollbars="vertical">
 
-<LinearLayout
-                android:layout_width="fill_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="8dp"
-                android:background="@drawable/layout_background_drawable"
-                android:orientation="vertical">
-
-                <TextView
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:paddingBottom="5dp"
-                    android:paddingLeft="5dp"
-                    android:paddingTop="5dp"
-                    android:text="Master Email"
-                    android:textAppearance="?android:attr/textAppearanceLargeInverse"
-                    android:textColor="#7E354D" />
-
-                <EditText
-                    android:id="@+id/masterEmail"
-                    android:layout_width="fill_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@drawable/edittext__drawable"
-                    android:text="Use to Sync cloud....SHUVO"
-                    android:enabled="true"
-                    android:inputType="textEmailAddress" />
-            </LinearLayout>
             
             <LinearLayout
                 android:layout_width="fill_parent"
