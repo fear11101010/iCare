@@ -8,6 +8,8 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
+import com.example.arafathossain.fragment.CreateDietFragment;
+
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -24,6 +26,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ProfileTable.CREATE_TABLE_QUERY);
         db.execSQL(DietTable.CREATE_TABLE_QUERY);
         db.execSQL(DoctorProfileTable.CREATE_TABLE_QUERY);
+        db.execSQL(AlarmTable.CREATE_TABLE_QUERY);
     }
 
     @Override
@@ -31,6 +34,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(ProfileTable.DROP_TABLE_QUERY);
         db.execSQL(DietTable.DROP_TABLE_QUERY);
         db.execSQL(DoctorProfileTable.DROP_TABLE_QUERY);
+        db.execSQL(AlarmTable.DROP_TABLE_QUERY);
+        db.execSQL(AlarmTable.CREATE_TABLE_QUERY);
         db.execSQL(ProfileTable.CREATE_TABLE_QUERY);
         db.execSQL(DietTable.CREATE_TABLE_QUERY);
         db.execSQL(DoctorProfileTable.CREATE_TABLE_QUERY);
@@ -103,18 +108,19 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         int row = db.delete(ProfileTable.TABLE_NAME, "_id=?", new String[]{profileId});
         db.delete(DietTable.TABLE_NAME, DietTable.COLUMN_PROFILE_ID + "=?", new String[]{profileId});
+        db.delete(AlarmTable.TABLE_NAME, AlarmTable.COLUMN_PROFILE_ID + "=?", new String[]{profileId});
         if (row > 0) return 1;
         return 0;
     }
 
-    public ArrayList<Integer> getAllDietIdByProfileId(String profileId) {
+    public ArrayList<Integer> getAllAlarmByProfileId(String profileId) {
         SQLiteDatabase db = getReadableDatabase();
         ArrayList<Integer> idList = null;
-        Cursor cursor = db.query(DietTable.TABLE_NAME, new String[]{DietTable.COLUMN_ID}, DietTable.COLUMN_PROFILE_ID + "=?", new String[]{profileId}, null, null, null);
+        Cursor cursor = db.query(AlarmTable.TABLE_NAME, new String[]{AlarmTable.COLUMN_ID}, AlarmTable.COLUMN_PROFILE_ID + "=?", new String[]{profileId}, null, null, null);
         if (cursor.moveToFirst()) {
             idList = new ArrayList<>();
             do {
-                idList.add(cursor.getInt(cursor.getColumnIndex(DietTable.COLUMN_ID)));
+                idList.add(cursor.getInt(cursor.getColumnIndex(AlarmTable.COLUMN_ID)));
             } while (cursor.moveToNext());
             Log.d("sizeid", idList.size() + "");
         }
@@ -133,8 +139,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             cursor.close();
             return false;
-        }
-        else {
+        } else {
             cursor.close();
             return true;
         }
@@ -152,7 +157,14 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return (int) db.insert(DietTable.TABLE_NAME, null, values);
     }
-
+    public int addAlarmInformation(Reminder reminder) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(AlarmTable.COLUMN_ALARM_KEY, reminder.getKey());
+        values.put(AlarmTable.COLUMN_KEY_ID, reminder.getKeyId());
+        values.put(AlarmTable.COLUMN_PROFILE_ID,reminder.getProfileId());
+        return (int) db.insert(AlarmTable.TABLE_NAME, null, values);
+    }
     public int updateDiet(ContentValues values, int id) {
         SQLiteDatabase db = getWritableDatabase();
         return db.update(DietTable.TABLE_NAME, values, DietTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
@@ -171,7 +183,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 diet.setTime(cursor.getString(cursor.getColumnIndex(DietTable.COLUMN_TIME)));
                 diet.setReminder(cursor.getString(cursor.getColumnIndex(DietTable.COLUMN_REMINDER)));
                 diet.setMenu(cursor.getString(cursor.getColumnIndex(DietTable.COLUMN_MENU)));
-                diet.setProfileName(cursor.getString(cursor.getColumnIndex(DietTable.COLUMN_PROFILE_ID)));
+                diet.setProfileId(cursor.getString(cursor.getColumnIndex(DietTable.COLUMN_PROFILE_ID)));
                 diet.setDay(cursor.getString(cursor.getColumnIndex(DietTable.COLUMN_DAY)));
                 dietList.add(diet);
             } while (cursor.moveToNext());
@@ -184,7 +196,20 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(DietTable.TABLE_NAME, DietTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
     }
-
+    public int removeAlarm(String dietId) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(AlarmTable.TABLE_NAME, AlarmTable.COLUMN_KEY_ID + "=? AND "+AlarmTable.COLUMN_ALARM_KEY+"=?", new String[]{dietId, CreateDietFragment.ALARM_KEY_DIET});
+    }
+    public int getAlarmByDietId(String dietId) {
+        SQLiteDatabase db = getReadableDatabase();
+        int alarmId = -1;
+        Cursor cursor = db.query(AlarmTable.TABLE_NAME, new String[]{AlarmTable.COLUMN_ID}, AlarmTable.COLUMN_KEY_ID + "=? AND "+AlarmTable.COLUMN_ALARM_KEY+"=?", new String[]{dietId, CreateDietFragment.ALARM_KEY_DIET}, null, null, null);
+        if (cursor.moveToFirst()) {
+            alarmId = cursor.getInt(cursor.getColumnIndex(AlarmTable.COLUMN_ID));
+        }
+        cursor.close();
+        return alarmId;
+    }
     public int addDoctorProfile(DoctorProfile profile) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -204,6 +229,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         }
         return 1;
     }
+
     public ArrayList<DoctorProfile> getAllDoctorProfile() {
         ArrayList<DoctorProfile> profiles = null;
         SQLiteDatabase db = getReadableDatabase();
@@ -220,10 +246,12 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return profiles;
     }
+
     public int removeDoctorProfile(int id) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(DoctorProfileTable.TABLE_NAME, DoctorProfileTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
     }
+
     public class DietTable {
         public static final String COLUMN_TIME = "time";
         public static final String COLUMN_PROFILE_ID = "profile_id";
@@ -248,10 +276,9 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String TABLE_NAME = "profile";
 
 
-
         public static final String COLUMN_PROFILE_NAME = "profile_name";
-        
-        
+
+
         public static final String COLUMN_USER_NAME = "user_name";
         public static final String COLUMN_EMAIL = "email";
         public static final String COLUMN_CONTACT_NO = "contact_no";
@@ -296,6 +323,22 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_CHAMBER_ADDRESS + " TEXT," +
                 COLUMN_EMAIL + " TEXT," +
                 COLUMN_CONTACT_NO + " TEXT)";
+
+
+        public static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+    }
+
+    public class AlarmTable {
+        public static final String TABLE_NAME = "alarm_schedule";
+        public static final String COLUMN_ALARM_KEY = "key";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_KEY_ID = "key_id";
+        public static final String COLUMN_PROFILE_ID = "profile_id";
+
+        public static final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +COLUMN_KEY_ID+" INTEGER,"+COLUMN_PROFILE_ID+" INTEGER,"+
+                COLUMN_ALARM_KEY + " TEXT)";
 
 
         public static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;

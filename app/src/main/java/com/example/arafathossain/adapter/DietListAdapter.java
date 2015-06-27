@@ -50,21 +50,26 @@ public class DietListAdapter extends ArrayAdapter {
         holder.toolbar.setOnMenuItemClickListener(new Toolbar.OnMenuItemClickListener() {
             @Override
             public boolean onMenuItemClick(MenuItem item) {
-                switch (item.getItemId()){
+                switch (item.getItemId()) {
                     case R.id.editDiet:
                         DialogFragment fragment = CreateDietFragment.getInstance(dietInformation);
-                        fragment.show(((AppCompatActivity)context).getSupportFragmentManager(),"createDiet");
+                        fragment.show(((AppCompatActivity) context).getSupportFragmentManager(), "createDiet");
                         break;
                     case R.id.removeDiet:
-                        if (ApplicationMain.getDatabase().removeDiet(dietInformation.getId())>0) {
+                        if (ApplicationMain.getDatabase().removeDiet(dietInformation.getId()) > 0) {
+                            int alarmId = ApplicationMain.getDatabase().getAlarmByDietId(String.valueOf(dietInformation.getId()));
+
+                            if (alarmId > -1) {
+                                Intent alarmReceiver = new Intent(context, AlarmReceiver.class);
+                                PendingIntent dietIntent = PendingIntent.getBroadcast(context, dietInformation.getId(), alarmReceiver, 0);
+                                ApplicationMain.getAlarmManager().cancel(dietIntent);
+                                ApplicationMain.getDatabase().removeAlarm(String.valueOf(dietInformation.getId()));
+                            }
                             notifyDataSetChanged();
-                            Intent alarmReceiver = new Intent(context, AlarmReceiver.class);
-                            PendingIntent dietIntent = PendingIntent.getBroadcast(context,dietInformation.getId(),alarmReceiver,0);
-                            ApplicationMain.getAlarmManager().cancel(dietIntent);
                         }
                         break;
                 }
-                return false;
+                return true;
             }
         });
         holder.titleView.setText(dietInformation.getTitle());

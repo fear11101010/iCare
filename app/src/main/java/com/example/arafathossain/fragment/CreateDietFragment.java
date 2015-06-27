@@ -9,6 +9,7 @@ import android.content.ContentValues;
 import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
+import android.provider.AlarmClock;
 import android.support.annotation.NonNull;
 import android.support.v4.app.DialogFragment;
 import android.util.Log;
@@ -27,6 +28,7 @@ import com.example.arafathossain.icare.ApplicationMain;
 import com.example.arafathossain.icare.DatabaseHelper;
 import com.example.arafathossain.icare.DietInformation;
 import com.example.arafathossain.icare.R;
+import com.example.arafathossain.icare.Reminder;
 import com.example.arafathossain.interfacee.OnDietCreateListener;
 
 import java.text.SimpleDateFormat;
@@ -46,6 +48,8 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
     CheckedTextView reminder;
     OnDietCreateListener onDietCreateListener;
     DietInformation dietInformation;
+    public static final String ALARM_KEY_DIET = "diet";
+    public static final String ALARM_KEY_APPOINTMENT = "doctorAppointment";
     boolean[] checkItem = {false, false, false, false, false, false, false};
 
     public static CreateDietFragment getInstance(String profileTitle) {
@@ -273,7 +277,7 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
         }
         DietInformation dietInformation = new DietInformation();
         dietInformation.setMenu(menuText);
-        dietInformation.setProfileName(getActivity().getIntent().getStringExtra("profileId"));
+        dietInformation.setProfileId(getActivity().getIntent().getStringExtra("profileId"));
         dietInformation.setTime(timeText);
         dietInformation.setReminder(reminderText);
         dietInformation.setTitle(titleText);
@@ -357,13 +361,16 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
             reminderTimeInMills += 7 * 24 * 60 * 60 * 1000;
             Log.d("reminder", "less");
         }
-
-        Intent alarmReceiver = new Intent(getActivity(), AlarmReceiver.class);
-        alarmReceiver.putExtra("title", titleView.getText());
-        alarmReceiver.putExtra("day", repeatView.getText());
-        alarmReceiver.putExtra("menu", menuView.getText());
-        PendingIntent dietIntent = PendingIntent.getBroadcast(getActivity(), id, alarmReceiver, 0);
-        ApplicationMain.getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP, reminderTimeInMills, 7 * 24 * 60 * 60 * 1000, dietIntent);
+        int alarmId = ApplicationMain.getDatabase().addAlarmInformation(new Reminder(ALARM_KEY_DIET,String.valueOf(id),getActivity().getIntent().getStringExtra("profileId")));
+        if (alarmId>-1) {
+            Log.d("ppppp",alarmId+"");
+            Intent alarmReceiver = new Intent(getActivity(), AlarmReceiver.class);
+            alarmReceiver.putExtra("title", titleView.getText());
+            alarmReceiver.putExtra("day", repeatView.getText());
+            alarmReceiver.putExtra("menu", menuView.getText());
+            PendingIntent dietIntent = PendingIntent.getBroadcast(getActivity(), alarmId, alarmReceiver, 0);
+            ApplicationMain.getAlarmManager().setRepeating(AlarmManager.RTC_WAKEUP,reminderTimeInMills, 24*60*60*1000* 7, dietIntent);
+        }
     }
 
     @Override

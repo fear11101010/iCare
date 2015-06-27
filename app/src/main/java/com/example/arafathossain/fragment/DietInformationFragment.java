@@ -8,15 +8,17 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 
+import com.astuetz.PagerSlidingTabStrip;
 import com.example.arafathossain.adapter.DietPagerAdapter;
 import com.example.arafathossain.icare.R;
 import com.example.arafathossain.interfacee.OnDietCreateListener;
-import com.example.arafathossain.interfacee.OnUpdateListener;
 
 
-public class DietInformationFragment extends Fragment implements OnDietCreateListener {
+public class DietInformationFragment extends Fragment implements OnDietCreateListener, ViewPager.OnPageChangeListener {
     DietPagerAdapter dietPagerAdapter;
     ViewPager viewPager;
+    PagerSlidingTabStrip tabs;
+    int currentPage;
 
     public static DietInformationFragment getInstance(String profileId) {
         Bundle bundle = new Bundle();
@@ -30,9 +32,13 @@ public class DietInformationFragment extends Fragment implements OnDietCreateLis
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_diet_information, container, false);
+        tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
         viewPager = (ViewPager) view.findViewById(R.id.fragmentPager);
         dietPagerAdapter = new DietPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(dietPagerAdapter);
+        tabs.setViewPager(viewPager);
+        tabs.setOnPageChangeListener(this);
+        currentPage = 0;
         return view;
     }
 
@@ -40,11 +46,28 @@ public class DietInformationFragment extends Fragment implements OnDietCreateLis
     public void onCreateDiet() {
         dietPagerAdapter = new DietPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(dietPagerAdapter);
+        viewPager.setCurrentItem(currentPage);
     }
 
     @Override
     public void onUpdateDiet() {
         dietPagerAdapter = new DietPagerAdapter(getActivity().getSupportFragmentManager());
         viewPager.setAdapter(dietPagerAdapter);
+        viewPager.setCurrentItem(currentPage);
+    }
+
+    @Override
+    public void onPageScrolled(int position, float positionOffset, int positionOffsetPixels) {
+
+    }
+
+    @Override
+    public void onPageSelected(int position) {
+        currentPage = position;
+    }
+
+    @Override
+    public void onPageScrollStateChanged(int state) {
+
     }
 }

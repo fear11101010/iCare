@@ -7,6 +7,7 @@ public class DietInformation {
     private String reminder;
     private String menu;
     private int id;
+    private String profileId;
 
     public DietInformation() {
     }
@@ -15,12 +16,9 @@ public class DietInformation {
         return profileId;
     }
 
-    public void setProfileName(String profileId) {
+    public void setProfileId(String profileId) {
         this.profileId = profileId;
     }
-
-    private String profileId;
-
 
     public String getTitle() {
         return title;

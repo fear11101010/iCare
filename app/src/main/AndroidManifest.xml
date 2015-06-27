@@ -1,6 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     package="com.example.arafathossain.icare" >
+    <uses-permission android:name="ANDROID.PERMISSION.WAKE_LOCK"/>
     <application
         android:allowBackup="true"
         android:icon="@mipmap/icare_icon"
@@ -23,7 +24,7 @@
             android:name=".ProfileDetailActivity"
              >
         </activity>
-        <receiver android:name=".AlarmReceiver"/>
+        <receiver android:name=".AlarmReceiver" android:enabled="true"/>
     </application>
 
 </manifest>

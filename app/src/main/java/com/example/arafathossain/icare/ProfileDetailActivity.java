@@ -252,12 +252,12 @@ public class ProfileDetailActivity extends AppCompatActivity implements DoctorCh
     }
 
     public void removeProfile() {
-        ArrayList<Integer> idList = ApplicationMain.getDatabase().getAllDietIdByProfileId(getIntent().getStringExtra("profileId"));
+        ArrayList<Integer> idList = ApplicationMain.getDatabase().getAllAlarmByProfileId(getIntent().getStringExtra("profileId"));
         int row = ApplicationMain.getDatabase().removeProfile(getIntent().getStringExtra("profileId"));
         if (row > 0) {
             if (idList != null)
                 for (int i : idList) {
-                    PendingIntent alarmIntent = PendingIntent.getBroadcast(this, i, new Intent(this, AlarmReceiver.class), PendingIntent.FLAG_UPDATE_CURRENT);
+                    PendingIntent alarmIntent = PendingIntent.getBroadcast(this, i, new Intent(this, AlarmReceiver.class), 0);
                     ApplicationMain.getAlarmManager().cancel(alarmIntent);
                 }
             Toast.makeText(this, "Profile Delete Complete", Toast.LENGTH_LONG).show();
