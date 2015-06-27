@@ -24,6 +24,8 @@ import java.util.Calendar;
 
 public class CreateProfileActivity extends AppCompatActivity {
     private Spinner bloodGroup;
+    private EditText masterEmail; ///*******Shuvo ************************/////////////////////
+    
     private EditText profileName;
     private EditText userName;
     private EditText email;
@@ -50,6 +52,9 @@ public class CreateProfileActivity extends AppCompatActivity {
         bloodGroup.setAdapter(spinnerAdapter);
         profileName = (EditText) findViewById(R.id.profileName);
         userName = (EditText) findViewById(R.id.userName);
+        
+        masterEmail = (EditText) findViewById(R.id.masteremail); //&*%$$#@!!!!!!!!!~~~~~~~~~$#$%#$^^^&&^*&*(*(()_
+        
         email = (EditText) findViewById(R.id.email);
         contactNo = (EditText) findViewById(R.id.contactNo);
         weight = (EditText) findViewById(R.id.weight);
@@ -79,6 +84,15 @@ public class CreateProfileActivity extends AppCompatActivity {
     }
 
     private void createProfile() {
+        
+        /////////////*******************//////////////**************************
+        if (!ProfileValidation.validateEmail(masterEmail.getText().toString())) {
+            Toast.makeText(this, "Invalid email", Toast.LENGTH_LONG).show();
+            return;
+        }
+        /////////////////////////*******************************/////////////////
+        
+        
         if (!ProfileValidation.validateProfileName(profileName.getText().toString())) {
             Toast.makeText(this, "Profile name invalid or already exists", Toast.LENGTH_LONG).show();
             return;
@@ -112,6 +126,10 @@ public class CreateProfileActivity extends AppCompatActivity {
         profile.setBloodGroup(bloodGroup.getSelectedItem().toString());
         profile.setProfileName(profileName.getText().toString());
         profile.setUserName(userName.getText().toString());
+        
+        profile.setMasterEmail(masterEmail.getText().toString()); ///////////////////////////////////////////**********************************
+        
+        
         profile.setEmail(email.getText().toString());
         profile.setContactNo(contactNo.getText().toString());
         profile.setHeight(height.getText().toString());
