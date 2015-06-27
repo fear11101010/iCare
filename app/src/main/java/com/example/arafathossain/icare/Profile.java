@@ -1,11 +1,9 @@
 package com.example.arafathossain.icare;
 
-/**
- * Created by Arafat Hossain on 6/9/2015.
- */
+
 public class Profile {
     private String masterEmail; //Shuvo*(*(*(*(*(*(*(*(*(*(*(*(*(*(*(
-    
+
     private String profileName;
     private String userName;
     private String email;
@@ -17,7 +15,7 @@ public class Profile {
     private String gender;
     private int id;
 
-    public Profile(int id,String masterEmail,String profileName, String userName, String email, String contactNo, String height, String weight, String bloodGroup, String dateOfBirth,String gender) {
+    public Profile(int id, String masterEmail, String profileName, String userName, String email, String contactNo, String height, String weight, String bloodGroup, String dateOfBirth, String gender) {
         this.id = id;
         this.masterEmail = masterEmail; //`````^^^^^@@@@@########%%%%%%%%
         this.profileName = profileName;
@@ -42,15 +40,15 @@ public class Profile {
         this.id = id;
     }
 
-/////////////////////////////////////////////////////////////////////////
-public String getMasterEmail() {
+    /////////////////////////////////////////////////////////////////////////
+    public String getMasterEmail() {
         return masterEmail;
     }
 
     public void setMasterEmail(String masterEmail) {
         this.masterEmail = masterEmail;
     }
-    
+
 ///////////////////////    ****************************************************
 
     public String getGender() {

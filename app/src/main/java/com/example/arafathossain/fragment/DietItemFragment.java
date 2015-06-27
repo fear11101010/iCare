@@ -40,6 +40,11 @@ public class DietItemFragment extends Fragment {
         notFound = (TextView) view.findViewById(R.id.notFound);
         dietList = (ListView) view.findViewById(R.id.dietList);
         weekDay.setText(getArguments().getString("weekDay"));
+        setAdapter();
+        return view;
+    }
+
+    public void setAdapter() {
         dietInformations = ApplicationMain.getDatabase().getDietList(getArguments().getString("weekDay"), getActivity().getIntent().getStringExtra("profileId"));
         if (dietInformations == null) {
             notFound.setVisibility(View.VISIBLE);
@@ -53,13 +58,9 @@ public class DietItemFragment extends Fragment {
                 @Override
                 public void onChanged() {
                     super.onChanged();
-                    if (dietListAdapter.getCount() == 0) {
-                        notFound.setVisibility(View.VISIBLE);
-                        dietList.setVisibility(View.GONE);
-                    }
+                    setAdapter();
                 }
             });
         }
-        return view;
     }
 }

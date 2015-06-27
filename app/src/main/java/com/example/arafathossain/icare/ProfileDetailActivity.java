@@ -22,6 +22,7 @@ import com.example.arafathossain.adapter.NavListAdaper;
 import com.example.arafathossain.fragment.CreateDietFragment;
 import com.example.arafathossain.fragment.CreateDoctorProfileFragment;
 import com.example.arafathossain.fragment.DietInformationFragment;
+import com.example.arafathossain.fragment.DoctorChamberAddressFragment;
 import com.example.arafathossain.fragment.DoctorManagementFragment;
 import com.example.arafathossain.fragment.GeneralInformationFragment;
 import com.example.arafathossain.fragment.HomeProfileDetailFragment;
@@ -31,7 +32,7 @@ import com.example.arafathossain.interfacee.OnUpdateListener;
 
 import java.util.ArrayList;
 
-public class ProfileDetailActivity extends AppCompatActivity implements OnUpdateListener, HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
+public class ProfileDetailActivity extends AppCompatActivity implements DoctorChamberAddressFragment.OnAddressCreateListener, OnUpdateListener, HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
     DrawerLayout drawerLayout;
     private static final int HOME_FRAGMENT = 1;
     private static final int DIET_FRAGMENT = 2;
@@ -51,7 +52,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements OnUpdate
     private int mode;
     private OnMenuItemClickListener menuItemClickListener;
     private OnDietCreateListener onDietCreateListener;
-    private OnUpdateListener onUpdateListener;
+    private DoctorChamberAddressFragment.OnAddressCreateListener addressCreateListener;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -218,7 +219,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements OnUpdate
         FragmentManager fragmentManager = getSupportFragmentManager();
         fragmentManager.popBackStack();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer, generalFragment,DOCTOR_FRAGMENT_TAG);
+        fragmentTransaction.replace(R.id.fragmentContainer, generalFragment, DOCTOR_FRAGMENT_TAG);
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.addToBackStack(DOCTOR_FRAGMENT_TAG);
         fragmentTransaction.commit();
@@ -320,16 +321,24 @@ public class ProfileDetailActivity extends AppCompatActivity implements OnUpdate
         mode = EDIT_MODE;
         invalidateOptionsMenu();
     }
+
     public void createProfile(View v) {
         Fragment fragment = new CreateDoctorProfileFragment();
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
-        fragmentTransaction.replace(R.id.fragmentContainer,fragment);
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment);
         fragmentTransaction.addToBackStack("doctorCreateProfile");
         fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.commit();
+        addressCreateListener = (DoctorChamberAddressFragment.OnAddressCreateListener) fragment;
     }
-    public void showDoctorCreateProfile(View v){
 
+    public void showDoctorCreateProfile(View v) {
+
+    }
+
+    @Override
+    public void onAddressCreate(String address) {
+        addressCreateListener.onAddressCreate(address);
     }
 }

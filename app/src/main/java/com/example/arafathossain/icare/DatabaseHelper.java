@@ -60,10 +60,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         if (cursor.moveToFirst()) {
             do {
                 userProfile = new Profile();
-                
-                userProfile.setMasterEmail(cursor.getString(cursor.getColumnIndex(ProfileTable.COLUMN_MASTER_EMAIL)));///////////////////********** /////////////////////
-                
-                
+
                 userProfile.setBloodGroup(cursor.getString(cursor.getColumnIndex(ProfileTable.COLUMN_BLOOD_GROUP)));
                 userProfile.setContactNo(cursor.getString(cursor.getColumnIndex(ProfileTable.COLUMN_CONTACT_NO)));
                 userProfile.setEmail(cursor.getString(cursor.getColumnIndex(ProfileTable.COLUMN_EMAIL)));
@@ -83,9 +80,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public int addProfile(Profile profile) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
-        
-        values.put(ProfileTable.COLUMN_MASTER_EMAIL, profile.getMasterEmail()); /////////////////////////********************************************///////////
-        
+
         values.put(ProfileTable.COLUMN_PROFILE_NAME, profile.getProfileName());
         values.put(ProfileTable.COLUMN_USER_NAME, profile.getUserName());
         values.put(ProfileTable.COLUMN_EMAIL, profile.getEmail());
@@ -251,8 +246,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
     public class ProfileTable {
         public static final String TABLE_NAME = "profile";
-        
-       public static final String COLUMN_MASTER_EMAIL = "master_email"; //////////////////////***************************///////
+
 
 
         public static final String COLUMN_PROFILE_NAME = "profile_name";
@@ -269,7 +263,6 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
                 "( _id INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_PROFILE_NAME + " TEXT NOT NULL," +
                 COLUMN_USER_NAME + " TEXT," +
-                COLUMN_MASTER_EMAIL + " TEXT," + ////////////////////////////*********************////////////////////////////
                 COLUMN_EMAIL + " TEXT," +
                 COLUMN_CONTACT_NO + " TEXT," +
                 COLUMN_DATE_OF_BIRTH + " TEXT," +

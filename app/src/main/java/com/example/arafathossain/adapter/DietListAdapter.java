@@ -21,9 +21,7 @@ import com.example.arafathossain.icare.R;
 
 import java.util.ArrayList;
 
-/**
- * Created by Arafat Hossain on 6/18/2015.
- */
+
 public class DietListAdapter extends ArrayAdapter {
     ArrayList<DietInformation> dietInformations;
     Context context;
@@ -59,7 +57,6 @@ public class DietListAdapter extends ArrayAdapter {
                         break;
                     case R.id.removeDiet:
                         if (ApplicationMain.getDatabase().removeDiet(dietInformation.getId())>0) {
-                            remove(dietInformation);
                             notifyDataSetChanged();
                             Intent alarmReceiver = new Intent(context, AlarmReceiver.class);
                             PendingIntent dietIntent = PendingIntent.getBroadcast(context,dietInformation.getId(),alarmReceiver,0);
