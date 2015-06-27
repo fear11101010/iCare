@@ -28,6 +28,9 @@ import java.util.Arrays;
 
 public class GeneralInformationFragment extends Fragment implements OnMenuItemClickListener {
     private Spinner bloodGroup;
+    
+    private EditText masterEmail; ////////////////********************---------------------/////////
+    
     private EditText profileName;
     private EditText userName;
     private EditText email;
@@ -55,6 +58,10 @@ public class GeneralInformationFragment extends Fragment implements OnMenuItemCl
         ArrayAdapter<CharSequence> spinnerAdapter = ArrayAdapter.createFromResource(getActivity(), R.array.bloodGroupList, R.layout.spinner_item);
         spinnerAdapter.setDropDownViewResource(R.layout.spinner_item);
         bloodGroup.setAdapter(spinnerAdapter);
+        
+        masterEmail = (EditText) view.findViewById(R.id.masteremail); ////////////*******************/////////////////////////*******
+        
+        
         profileName = (EditText) view.findViewById(R.id.profileName);
         userName = (EditText) view.findViewById(R.id.userName);
         email = (EditText) view.findViewById(R.id.email);
@@ -83,6 +90,10 @@ public class GeneralInformationFragment extends Fragment implements OnMenuItemCl
         profile = ApplicationMain.getDatabase().getProfileById(getArguments().getString("profileId"));
         int position = Arrays.binarySearch(getActivity().getResources().getStringArray(R.array.bloodGroupList), profile.getBloodGroup());
         bloodGroup.setSelection(position);
+        
+        masterEmail.setText(profile.getMasterEmail());////////////////////////////**************************///////////////////
+
+
         profileName.setText(profile.getProfileName());
         userName.setText(profile.getUserName());
         contactNo.setText(profile.getContactNo());
@@ -99,6 +110,10 @@ public class GeneralInformationFragment extends Fragment implements OnMenuItemCl
         userName.setEnabled(true);
         weight.setEnabled(true);
         height.setEnabled(true);
+        
+         masterEmail.setEnabled(true); ///////////////////////////////*****************************************/////////////////////
+         
+         
         email.setEnabled(true);
         contactNo.setEnabled(true);
         dateOfBirth.setEnabled(true);
@@ -110,6 +125,20 @@ public class GeneralInformationFragment extends Fragment implements OnMenuItemCl
 
     public void updateProfile() {
         ContentValues values = new ContentValues();
+        
+        
+
+        /////////////////////////////************************************************************///////////////////////////////////
+        if (!profile.getMasterEmail().equalsIgnoreCase(masterEmail.getText().toString())) {
+            if (!ProfileValidation.validateEmail(masterEmail.getText().toString())) {
+                Toast.makeText(getActivity(), "Invalid email", Toast.LENGTH_LONG).show();
+                return;
+            }
+            values.put(DatabaseHelper.ProfileTable.COLUMN_EMAIL, masterEmail.getText().toString());
+
+        }
+       /////////////////////////////////*************************************************/////////////////////////////////
+       
         if (!profile.getProfileName().equalsIgnoreCase(profileName.getText().toString())) {
             if (!ProfileValidation.validateProfileName(profileName.getText().toString())) {
                 Toast.makeText(getActivity(), "Profile name already exists", Toast.LENGTH_LONG).show();
@@ -181,6 +210,10 @@ public class GeneralInformationFragment extends Fragment implements OnMenuItemCl
     }
 
     public void disableAll() {
+        
+         masterEmail.setEnabled(false);  //////////////////////*****************************////////////////////////**********
+
+
         profileName.setEnabled(false);
         userName.setEnabled(false);
         weight.setEnabled(false);
