@@ -91,6 +91,37 @@
             android:text="Not set"
             android:textAppearance="?android:attr/textAppearanceMedium" />
     </LinearLayout>
+    <LinearLayout
+        android:id="@+id/attachment"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/dc"
+        android:layout_marginTop="8dp"
+
+        android:background="@drawable/layout_background_drawable"
+        android:orientation="vertical">
+
+        <TextView
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="Upload Prescription"
+            android:singleLine="true"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#7E354D" />
+
+        <TextView
+            android:id="@+id/prescription"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:paddingBottom="5dp"
+            android:paddingLeft="5dp"
+            android:paddingTop="5dp"
+            android:text="Not set"
+            android:textAppearance="?android:attr/textAppearanceMedium" />
+    </LinearLayout>
 
     <CheckedTextView
         android:id="@+id/reminder"
