@@ -22,6 +22,7 @@ import com.example.arafathossain.adapter.NavListAdaper;
 import com.example.arafathossain.fragment.CreateDietFragment;
 import com.example.arafathossain.fragment.CreateDoctorProfileFragment;
 import com.example.arafathossain.fragment.CreateVaccineSchedule;
+import com.example.arafathossain.fragment.VaccineDetailFragment;
 import com.example.arafathossain.fragment.DietInformationFragment;
 import com.example.arafathossain.fragment.DiseaseListFragment;
 import com.example.arafathossain.fragment.DoctorChamberAddressFragment;
@@ -35,7 +36,7 @@ import com.example.arafathossain.interfacee.OnUpdateListener;
 
 import java.util.ArrayList;
 
-public class ProfileDetailActivity extends AppCompatActivity implements DiseaseListFragment.OnVaccineScheduleCreateListener, DoctorChamberAddressFragment.OnAddressCreateListener, OnUpdateListener, HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
+public class ProfileDetailActivity extends AppCompatActivity implements  DiseaseListFragment.OnVaccineScheduleCreateListener, DoctorChamberAddressFragment.OnAddressCreateListener, OnUpdateListener, HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
     DrawerLayout drawerLayout;
     private static final int HOME_FRAGMENT = 1;
     private static final int DIET_FRAGMENT = 2;
@@ -356,7 +357,7 @@ public class ProfileDetailActivity extends AppCompatActivity implements DiseaseL
 
     @Override
     public void onCreateSchedule(String dn, String vn, String dsy, String dcom, String dcause, String doses) {
-        Fragment fragment = CreateVaccineSchedule.getInstance(dn,vn,dsy,dcom,dcause,doses);
+        Fragment fragment = VaccineDetailFragment.getInstance(dn, vn, dsy, dcom, dcause, doses);
         FragmentManager fragmentManager = getSupportFragmentManager();
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainer,fragment);

@@ -1,22 +1,26 @@
 <?xml version="1.0" encoding="utf-8"?>
-<RelativeLayout
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:android="http://schemas.android.com/apk/res/android" >
+    android:padding="5dp">
+
     <ScrollView
         android:layout_width="match_parent"
-        android:layout_alignParentTop="true"
+        android:layout_height="match_parent"
         android:layout_above="@+id/saveSchedule"
-        android:layout_height="match_parent">
+        android:layout_alignParentTop="true">
+
         <LinearLayout
-            android:orientation="vertical" android:layout_width="match_parent"
-            android:layout_height="match_parent">
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:orientation="vertical">
 
             <LinearLayout
                 android:layout_width="fill_parent"
                 android:layout_height="wrap_content"
                 android:background="@drawable/layout_background_drawable"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -24,18 +28,19 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="Disease Name"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
                 <TextView
+                    android:id="@+id/diseaseName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/diseaseName"
+                    android:hint="Disease list"
                     android:paddingBottom="5dp"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
-                    android:hint="Disease list"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -45,6 +50,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/layout_background_drawable"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -52,18 +58,19 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="Vaccine Name"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
                 <TextView
+                    android:id="@+id/vaccineName"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/vaccineName"
+                    android:hint="Vaccine list"
                     android:paddingBottom="5dp"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
-                    android:hint="Vaccine list"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -73,6 +80,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/layout_background_drawable"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -80,18 +88,19 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="Disease Symptoms"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
                 <TextView
+                    android:id="@+id/symptoms"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Symptoms"
                     android:paddingBottom="5dp"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
-                    android:id="@+id/symptoms"
-                    android:hint="Symptoms"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -101,6 +110,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/layout_background_drawable"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -108,18 +118,19 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="Disease Complications"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
                 <TextView
+                    android:id="@+id/complications"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Complications"
                     android:paddingBottom="5dp"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
-                    android:id="@+id/complications"
-                    android:hint="Complications"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -129,6 +140,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/layout_background_drawable"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -136,18 +148,19 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="Disease Causes"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
                 <TextView
+                    android:id="@+id/causes"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
+                    android:hint="Causes"
                     android:paddingBottom="5dp"
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
-                    android:id="@+id/causes"
-                    android:hint="Causes"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
 
             </LinearLayout>
 
@@ -157,6 +170,7 @@
                 android:layout_marginTop="8dp"
                 android:background="@drawable/layout_background_drawable"
                 android:orientation="vertical">
+
                 <TextView
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
@@ -164,12 +178,13 @@
                     android:paddingLeft="5dp"
                     android:paddingTop="5dp"
                     android:text="Vaccine Doses"
-                    android:textSize="20sp"
-                    android:textColor="#000"/>
+                    android:textColor="#000"
+                    android:textSize="20sp" />
+
                 <LinearLayout
+                    android:id="@+id/dosesList"
                     android:layout_width="fill_parent"
                     android:layout_height="wrap_content"
-                    android:id="@+id/dosesList"
                     android:orientation="vertical">
 
                 </LinearLayout>
@@ -179,11 +194,12 @@
 
         </LinearLayout>
     </ScrollView>
+
     <LinearLayout
-        android:id="@+id/saveSchedule"
-        android:layout_alignParentBottom="true"
+        android:id="@+id/createVaccineSchedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true"
         android:layout_below="@+id/reminder"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_layout_background"
@@ -200,7 +216,7 @@
             android:clickable="false"
             android:focusable="false"
             android:focusableInTouchMode="false"
-            android:src="@drawable/save" />
+            android:src="@drawable/add_icon" />
 
         <TextView
             android:layout_width="wrap_content"
@@ -212,7 +228,7 @@
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="8dp"
-            android:text="Save "
+            android:text="Create Schedule "
             android:textColor="#FFFFFF" />
     </LinearLayout>
 </RelativeLayout>
