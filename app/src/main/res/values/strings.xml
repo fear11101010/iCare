@@ -62,5 +62,62 @@
         <item>Thursday</item>
         <item>Friday</item>
     </string-array>
+    <string-array name="vaccineMonth">
+        <item>Birth</item>
+        <item>1st&amp;Month</item>
+        <item>2nd&amp;Month</item>
+        <item>4th&amp;Month</item>
+        <item>6th&amp;Month</item>
+        <item>9th&amp;Month</item>
+        <item>12th&amp;Month</item>
+        <item>15th&amp;Month</item>
+        <item>18th&amp;Month</item>
+        <item>19-23th&amp;Month</item>
+        <item>2-3&amp;Year</item>
+        <item>4-6&amp;Year</item>
+        <item>7-8&amp;Year</item>
+        <item>9-10&amp;Year</item>
+        <item>11-12&amp;Year</item>
+    </string-array>
+
+    <string-array name="vaccineList">
+        <item>HepB</item>
+        <item>RV</item>
+        <item>DTaP</item>
+        <item>Tdap</item>
+        <item>Hib</item>
+        <item>PCV13</item>
+        <item>PPSV23</item>
+        <item>IPV</item>
+        <item>IIV;&amp;or&amp;LAIV</item>
+        <item>MMR</item>
+        <item>VAR</item>
+        <item>HepA</item>
+        <item>HPV</item>
+        <item>MCV4</item>
+
+    </string-array>
+
+    <string-array name="diseaseComplications">
+        <item>Infected&amp;blisters,&amp;bleeding&amp;disorders,&amp;encephalitis&amp;(brain&amp;swelling),&amp;pneumonia&amp;
+            (infection&amp;in&amp;the&amp;lungs)</item>
+        <item>Swelling&amp;of&amp;the&amp;heart&amp;muscle,&amp;heart&amp;failure,&amp;coma,&amp;paralysis,&amp;death</item>
+        <item>Meningitis&amp;(infection&amp;of&amp;the&amp;covering&amp;around&amp;the&amp;brain&amp;and&amp;
+            spinal&amp;cord),&amp;intellectual&amp;disability,&amp;epiglottitis&amp;(lifethreatening&amp;infection&amp;that&amp;can&amp;block&amp;the&amp;
+            windpipe&amp;and&amp;lead&amp;to&amp;serious&amp;breathing&amp;problems),&amp;pneumonia&amp;(infection&amp;in&amp;the&amp;lungs),&amp;death </item>
+        <item>Liver&amp;failure,&amp;arthralgia&amp;(joint&amp;pain),&amp;kidney,&amp;pancreatic,&amp;and&amp;blood&amp;disorders</item>
+        <item>Chronic&amp;liver&amp;infection,&amp;liver&amp;failure,&amp;liver&amp;cancer</item>
+        <item>Pneumonia&amp;(infection&amp;in&amp;the&amp;lungs)</item>
+        <item>Encephalitis&amp;(brain&amp;swelling),&amp;pneumonia&amp;(infection&amp;in&amp;the&amp;lungs),&amp;death</item>
+        <item>Meningitis&amp;(infection&amp;of&amp;the&amp;covering&amp;around&amp;the&amp;brain&amp;and&amp;spinal&amp;cord)&amp;,&amp;encephalitis&amp;(brain&amp;swelling),&amp;inflammation&amp;of&amp;testicles&amp;or&amp;ovaries,&amp;deafness</item>
+        <item>Pneumonia&amp;(infection&amp;in&amp;the&amp;lungs),&amp;death</item>
+        <item>Paralysis,&amp;death</item>
+        <item>Bacteremia&amp;(blood&amp;infection),&amp;meningitis&amp;(infection&amp;of&amp;the&amp;covering&amp;around&amp;the&amp;brain&amp;and&amp;spinal&amp;cord),&amp;death</item>
+        <item>Severe&amp;diarrhea,&amp;dehydration</item>
+        <item>Very&amp;serious&amp;in&amp;pregnant&amp;women—can&amp;lead&amp;to&amp;miscarriage,&amp;stillbirth,&amp;premature&amp;delivery,&amp;birth&amp;defects</item>
+        <item>Broken&amp;bones,&amp;breathing&amp;difficulty,&amp;death</item>
+
+    </string-array>
+
     <string name="title_activity_profile_detail">ProfileDetailActivity</string>
 </resources>
