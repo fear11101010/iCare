@@ -12,11 +12,11 @@
         android:id="@+id/removeProfile"
         android:layout_width="32dp"
         android:layout_height="32dp"
-        android:scaleType="fitXY"
         android:layout_alignParentEnd="true"
         android:layout_alignParentRight="true"
         android:background="#FFFFFF"
         android:contentDescription="@string/remove"
+        android:scaleType="fitXY"
         android:src="@drawable/remove_button_background" />
 
     <TextView

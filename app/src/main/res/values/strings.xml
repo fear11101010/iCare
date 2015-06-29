@@ -119,5 +119,55 @@
 
     </string-array>
 
+    <string-array name="diseaseNames">
+        <item>Chickenpox</item>
+        <item>Diphtheria</item>
+        <item>Hib</item>
+        <item>Hepatitis&amp;A</item>
+        <item>Hepatiti&amp;B</item>
+        <item>Flu</item>
+        <item>Measles</item>
+        <item>Mumps</item>
+        <item>Pertussis</item>
+        <item>Polio</item>
+        <item>Pneumococcal</item>
+        <item>Rotavirus</item>
+        <item>Rubella</item>
+        <item>Tetanus</item>
+    </string-array>
+    <string-array name="causeOfDisease">
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Direct&amp;contact,&amp;contaminated&amp;food&amp;or&amp;water</item>
+        <item>Contact&amp;with&amp;blood&amp;or&amp;body&amp;fluids</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Air,&amp;direct&amp;contact,&amp;through&amp;the&amp;mouth</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Through&amp;the&amp;mouth</item>
+        <item>Air,&amp;direct&amp;contact</item>
+        <item>Exposure&amp;through&amp;cuts&amp;in&amp;skin</item>
+
+    </string-array>
+    <string-array name="diseaseSymptoms">
+        <item>Rash, tiredness, headache, fever</item>
+        <item>Sore throat, mild fever, weakness, swollen glands in neck</item>
+        <item>May be no symptoms unless bacteria enter the blood</item>
+        <item>May be no symptoms, fever, stomach pain, loss of appetite, fatigue, vomiting, jaundice (yellowing of skin and eyes), dark urine</item>
+        <item>May be no symptoms, fever, headache, weakness, vomiting, jaundice (yellowing of skin and eyes), joint pain</item>
+        <item>Fever, muscle pain, sore throat, cough, extreme fatigue</item>
+        <item>Rash, fever, cough, runny nose, pinkeye</item>
+        <item>Swollen salivary glands (under the jaw), fever, headache, tiredness, muscle pain</item>
+        <item>Severe cough, runny nose, apnea (a pause in breathing in infants)</item>
+        <item>May be no symptoms, sore throat, fever, nausea, headache</item>
+        <item>May be no symptoms, pneumonia (infection in the lungs)</item>
+        <item>Diarrhea, fever, vomiting</item>
+        <item>Children infected with rubella virus sometimes have a rash, fever, swollen lymph nodes</item>
+        <item>Stiffness in neck and abdominal muscles, difficulty swallowing, muscle spasms, fever</item>
+
+    </string-array>
     <string name="title_activity_profile_detail">ProfileDetailActivity</string>
 </resources>
