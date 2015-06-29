@@ -23,6 +23,7 @@ public class DoctorNewAppointmentFragment extends DialogFragment implements View
     public Dialog onCreateDialog(Bundle savedInstanceState) {
         View view = ((LayoutInflater) getActivity().getSystemService(Context.LAYOUT_INFLATER_SERVICE)).inflate(R.layout.fragment_doctor_appointment_create_layout, null);
         attachment = view.findViewById(R.id.attachment);
+        attachment.setOnClickListener(this);
         AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
         builder.setView(view);
         return builder.create();
@@ -55,5 +56,7 @@ public class DoctorNewAppointmentFragment extends DialogFragment implements View
                 }
             }
         });
+        builder.setTitle("Choose a action");
+        builder.create().show();
     }
 }

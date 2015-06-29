@@ -28,7 +28,7 @@
         <activity
             android:name=".CreateProfileActivity"
             android:label="@string/new_profile_activity" />
-        <activity android:name=".ProfileDetailActivity"></activity>
+        <activity android:name=".ProfileDetailActivity"/>
 
         <receiver
             android:name=".AlarmReceiver"

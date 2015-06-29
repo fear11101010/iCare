@@ -28,6 +28,7 @@ public class DoctorProfileFragment extends Fragment implements SwipeRefreshLayou
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_profile_layout, container, false);
         refreshLayout = (SwipeRefreshLayout) view.findViewById(R.id.refresh);
+        refreshLayout.setRefreshing(false);
         doctorProfileList = (ListView) view.findViewById(R.id.doctorProfileList);
         setAdapter();
         refreshLayout.setOnRefreshListener(this);

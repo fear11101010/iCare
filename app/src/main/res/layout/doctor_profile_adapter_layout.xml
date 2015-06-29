@@ -1,34 +1,37 @@
 <?xml version="1.0" encoding="utf-8"?>
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    android:orientation="vertical" android:layout_width="match_parent"
-    android:padding="8dp"
-    android:focusable="true"
-    android:clickable="true"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
     android:background="#FFFFFF"
-    android:layout_height="match_parent">
+    android:clickable="true"
+    android:focusable="true"
+    android:orientation="vertical"
+    android:padding="8dp">
+
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
         android:id="@+id/removeProfile"
-        android:src="@drawable/remove_profile"
-        android:layout_alignParentRight="true"
+        android:layout_width="32dp"
+        android:layout_height="32dp"
+        android:scaleType="fitXY"
         android:layout_alignParentEnd="true"
+        android:layout_alignParentRight="true"
         android:background="#FFFFFF"
-        />
+        android:contentDescription="@string/remove"
+        android:src="@drawable/remove_button_background" />
+
     <TextView
+        android:id="@+id/textView"
         android:layout_width="fill_parent"
         android:layout_height="wrap_content"
+        android:layout_alignParentTop="true"
         android:layout_toLeftOf="@+id/removeProfile"
         android:layout_toStartOf="@+id/removeProfile"
-        android:layout_alignBottom="@+id/removeProfile"
+        android:clickable="false"
+        android:focusable="false"
+        android:focusableInTouchMode="false"
         android:paddingLeft="8dp"
         android:paddingRight="8dp"
-        android:id="@+id/textView"
-        android:focusable="false"
-        android:clickable="false"
-        android:focusableInTouchMode="false"
-        android:textAppearance="?android:attr/textAppearanceLargeInverse"
-        android:textColor="#000000"
         android:singleLine="true"
-        android:layout_alignParentTop="true"/>
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="#000000" />
 </RelativeLayout>

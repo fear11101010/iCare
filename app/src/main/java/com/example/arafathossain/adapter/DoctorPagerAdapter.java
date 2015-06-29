@@ -40,4 +40,5 @@ public class DoctorPagerAdapter extends FragmentStatePagerAdapter {
         return TITLE[position];
     }
 
+
 }

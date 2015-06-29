@@ -1,6 +1,8 @@
 package com.example.arafathossain.fragment;
 
+import android.database.DataSetObserver;
 import android.os.Bundle;
+import android.os.Parcelable;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.support.v4.view.ViewPager;
@@ -16,6 +18,8 @@ import com.example.arafathossain.icare.R;
 public class DoctorManagementFragment extends Fragment {
     ViewPager doctorPager;
     PagerSlidingTabStrip tabs;
+    DoctorPagerAdapter doctorPagerAdapter;
+    Parcelable state;
     int currentPage;
 
     @Nullable
@@ -24,8 +28,8 @@ public class DoctorManagementFragment extends Fragment {
         View view = inflater.inflate(R.layout.fragment_doctor_layout, container, false);
         tabs = (PagerSlidingTabStrip) view.findViewById(R.id.tabs);
         doctorPager = (ViewPager) view.findViewById(R.id.doctorPager);
-
-        doctorPager.setAdapter(new DoctorPagerAdapter(getActivity().getSupportFragmentManager()));
+        doctorPagerAdapter = new DoctorPagerAdapter(getChildFragmentManager());
+        doctorPager.setAdapter(doctorPagerAdapter);
         tabs.setViewPager(doctorPager);
         tabs.setOnPageChangeListener(new ViewPager.OnPageChangeListener() {
             @Override
@@ -45,13 +49,5 @@ public class DoctorManagementFragment extends Fragment {
         });
         return view;
     }
-
-    @Override
-    public void onResume() {
-        super.onResume();
-        doctorPager.setAdapter(new DoctorPagerAdapter(getActivity().getSupportFragmentManager()));
-        doctorPager.setCurrentItem(currentPage);
-    }
-
 
 }
