@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="vertical" android:layout_width="match_parent"
+    android:layout_height="match_parent">
+<ListView
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:id="@+id/vaccineSchedule"
+    android:visibility="gone"/>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical"
+        android:id="@+id/noSchedule"
+        android:gravity="center">
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="No schedule found"
+            android:padding="10dp"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#ab0b0f"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="To create a new schedule"
+            android:padding="8dp"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#53ab1f"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="1. Go to disease list"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#53ab1f"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="2. Select a disease"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#53ab1f"/>
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:text="3. Create schedule"
+            android:textAppearance="?android:attr/textAppearanceLargeInverse"
+            android:textColor="#53ab1f"/>
+    </LinearLayout>
+</LinearLayout>

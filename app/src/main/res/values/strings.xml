@@ -83,50 +83,50 @@
     </string-array>
 
     <string-array name="doseMonths">
-        <item>12-15&amp;month,4-6&amp;year</item>
-        <item>2&amp;month,4&amp;month,6&amp;month,15-18&amp;month,4-6&amp;year</item>
-        <item>2&amp;month,4&amp;month,6&amp;month,12-15&amp;month</item>
-        <item>12&amp;month,18-23&amp;month</item>
-        <item>birth&amp;month,1-2&amp;month,6-18&amp;month</item>
-        <item>annual&amp;vaccination</item>
-        <item>12-15&amp;month,4-6&amp;year</item>
-        <item>12-15&amp;month,4-6&amp;year</item>
-        <item>2&amp;month,4&amp;month,6&amp;month,15-18&amp;month,4-6&amp;year</item>
-        <item>2&amp;month,4&amp;month,6-18&amp;month,4-6&amp;year</item>
-        <item>2&amp;month,4&amp;month,6&amp;month,12-15&amp;month</item>
-        <item>2&amp;month,4&amp;month</item>
-        <item>12-15&amp;month,4-6&amp;year</item>
-        <item>2&amp;month,4&amp;month,6&amp;month,15-18&amp;month,4-6&amp;year</item>
+        <item>12-15 month,4-6 year</item>
+        <item>2 month,4 month,6 month,15-18 month,4-6 year</item>
+        <item>2 month,4 month,6 month,12-15 month</item>
+        <item>12 month,18-23 month</item>
+        <item>birth month,1-2 month,6-18 month</item>
+        <item>annual vaccination</item>
+        <item>12-15 month,4-6 year</item>
+        <item>12-15 month,4-6 year</item>
+        <item>2 month,4 month,6 month,15-18 month,4-6 year</item>
+        <item>2 month,4 month,6-18 month,4-6 year</item>
+        <item>2 month,4 month,6 month,12-15 month</item>
+        <item>2 month,4 month</item>
+        <item>12-15 month,4-6 year</item>
+        <item>2 month,4 month,6 month,15-18 month,4-6 year</item>
         
     </string-array>
 
     <string-array name="diseaseComplications">
-        <item>Infected&amp;blisters,&amp;bleeding&amp;disorders,&amp;encephalitis&amp;(brain&amp;swelling),&amp;pneumonia&amp;
-            (infection&amp;in&amp;the&amp;lungs)</item>
-        <item>Swelling&amp;of&amp;the&amp;heart&amp;muscle,&amp;heart&amp;failure,&amp;coma,&amp;paralysis,&amp;death</item>
-        <item>Meningitis&amp;(infection&amp;of&amp;the&amp;covering&amp;around&amp;the&amp;brain&amp;and&amp;
-            spinal&amp;cord),&amp;intellectual&amp;disability,&amp;epiglottitis&amp;(lifethreatening&amp;infection&amp;that&amp;can&amp;block&amp;the&amp;
-            windpipe&amp;and&amp;lead&amp;to&amp;serious&amp;breathing&amp;problems),&amp;pneumonia&amp;(infection&amp;in&amp;the&amp;lungs),&amp;death </item>
-        <item>Liver&amp;failure,&amp;arthralgia&amp;(joint&amp;pain),&amp;kidney,&amp;pancreatic,&amp;and&amp;blood&amp;disorders</item>
-        <item>Chronic&amp;liver&amp;infection,&amp;liver&amp;failure,&amp;liver&amp;cancer</item>
-        <item>Pneumonia&amp;(infection&amp;in&amp;the&amp;lungs)</item>
-        <item>Encephalitis&amp;(brain&amp;swelling),&amp;pneumonia&amp;(infection&amp;in&amp;the&amp;lungs),&amp;death</item>
-        <item>Meningitis&amp;(infection&amp;of&amp;the&amp;covering&amp;around&amp;the&amp;brain&amp;and&amp;spinal&amp;cord)&amp;,&amp;encephalitis&amp;(brain&amp;swelling),&amp;inflammation&amp;of&amp;testicles&amp;or&amp;ovaries,&amp;deafness</item>
-        <item>Pneumonia&amp;(infection&amp;in&amp;the&amp;lungs),&amp;death</item>
-        <item>Paralysis,&amp;death</item>
-        <item>Bacteremia&amp;(blood&amp;infection),&amp;meningitis&amp;(infection&amp;of&amp;the&amp;covering&amp;around&amp;the&amp;brain&amp;and&amp;spinal&amp;cord),&amp;death</item>
-        <item>Severe&amp;diarrhea,&amp;dehydration</item>
-        <item>Very&amp;serious&amp;in&amp;pregnant&amp;women—can&amp;lead&amp;to&amp;miscarriage,&amp;stillbirth,&amp;premature&amp;delivery,&amp;birth&amp;defects</item>
-        <item>Broken&amp;bones,&amp;breathing&amp;difficulty,&amp;death</item>
+        <item>Infected blisters, bleeding disorders, encephalitis (brain swelling), pneumonia 
+            (infection in the lungs)</item>
+        <item>Swelling of the heart muscle, heart failure, coma, paralysis, death</item>
+        <item>Meningitis (infection of the covering around the brain and 
+            spinal cord), intellectual disability, epiglottitis (lifethreatening infection that can block the 
+            windpipe and lead to serious breathing problems), pneumonia (infection in the lungs), death </item>
+        <item>Liver failure, arthralgia (joint pain), kidney, pancreatic, and blood disorders</item>
+        <item>Chronic liver infection, liver failure, liver cancer</item>
+        <item>Pneumonia (infection in the lungs)</item>
+        <item>Encephalitis (brain swelling), pneumonia (infection in the lungs), death</item>
+        <item>Meningitis (infection of the covering around the brain and spinal cord) , encephalitis (brain swelling), inflammation of testicles or ovaries, deafness</item>
+        <item>Pneumonia (infection in the lungs), death</item>
+        <item>Paralysis, death</item>
+        <item>Bacteremia (blood infection), meningitis (infection of the covering around the brain and spinal cord), death</item>
+        <item>Severe diarrhea, dehydration</item>
+        <item>Very serious in pregnant women—can lead to miscarriage, stillbirth, premature delivery, birth defects</item>
+        <item>Broken bones, breathing difficulty, death</item>
 
     </string-array>
 
     <string-array name="diseaseNames">
         <item>Chickenpox</item>
         <item>Diphtheria</item>
-        <item>Hib</item>
-        <item>Hepatitis&amp;A</item>
-        <item>Hepatiti&amp;B</item>
+        <item>Haemophilus Influenzae type B</item>
+        <item>Hepatitis A</item>
+        <item>Hepatiti B</item>
         <item>Flu</item>
         <item>Measles</item>
         <item>Mumps</item>
@@ -138,20 +138,20 @@
         <item>Tetanus</item>
     </string-array>
     <string-array name="causeOfDisease">
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Direct&amp;contact,&amp;contaminated&amp;food&amp;or&amp;water</item>
-        <item>Contact&amp;with&amp;blood&amp;or&amp;body&amp;fluids</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Air,&amp;direct&amp;contact,&amp;through&amp;the&amp;mouth</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Through&amp;the&amp;mouth</item>
-        <item>Air,&amp;direct&amp;contact</item>
-        <item>Exposure&amp;through&amp;cuts&amp;in&amp;skin</item>
+        <item>Air, direct contact</item>
+        <item>Air, direct contact</item>
+        <item>Air, direct contact</item>
+        <item>Direct contact, contaminated food or water</item>
+        <item>Contact with blood or body fluids</item>
+        <item>Air, direct contact</item>
+        <item>Air, direct contact</item>
+        <item>Air, direct contact</item>
+        <item>Air, direct contact</item>
+        <item>Air, direct contact, through the mouth</item>
+        <item>Air, direct contact</item>
+        <item>Through the mouth</item>
+        <item>Air, direct contact</item>
+        <item>Exposure through cuts in skin</item>
 
     </string-array>
     <string-array name="diseaseSymptoms">
