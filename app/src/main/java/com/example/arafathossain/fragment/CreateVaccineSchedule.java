@@ -8,6 +8,8 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.CheckBox;
 import android.widget.LinearLayout;
+import android.widget.RadioButton;
+import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.example.arafathossain.icare.R;
@@ -51,13 +53,17 @@ public class CreateVaccineSchedule extends Fragment {
         diseaseComplication.setText(getArguments().getString("dcom"));
         diseaseCauses.setText(getArguments().getString("dcause"));
         String[] doseList = getArguments().getString("doses").split(",");
+        RadioGroup radioGroup = new RadioGroup(getActivity());
+        radioGroup.setOrientation(LinearLayout.VERTICAL);
+        vaccineDoses.addView(radioGroup);
         CheckBox[] doses = new CheckBox[doseList.length];
         for (int i = 0;i < doseList.length;i++){
-            doses[i] = new CheckBox(getActivity());
-            doses[i].setText(doseList[i]);
-            doses[i].setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
-            vaccineDoses.addView(doses[i]);
-            vaccineDoses.invalidate();
+            RadioButton radioButton = new RadioButton(getActivity());
+            radioButton.setText(doseList[i]);
+            radioButton.setId(i);
+            radioButton.setLayoutParams(new ViewGroup.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, ViewGroup.LayoutParams.WRAP_CONTENT));
+            radioGroup.addView(radioButton);
+            radioGroup.invalidate();
         }
     }
 }
