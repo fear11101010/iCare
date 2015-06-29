@@ -62,40 +62,42 @@
         <item>Thursday</item>
         <item>Friday</item>
     </string-array>
-    <string-array name="vaccineMonth">
-        <item>Birth</item>
-        <item>1st&amp;Month</item>
-        <item>2nd&amp;Month</item>
-        <item>4th&amp;Month</item>
-        <item>6th&amp;Month</item>
-        <item>9th&amp;Month</item>
-        <item>12th&amp;Month</item>
-        <item>15th&amp;Month</item>
-        <item>18th&amp;Month</item>
-        <item>19-23th&amp;Month</item>
-        <item>2-3&amp;Year</item>
-        <item>4-6&amp;Year</item>
-        <item>7-8&amp;Year</item>
-        <item>9-10&amp;Year</item>
-        <item>11-12&amp;Year</item>
+    
+
+ <string-array name="vaccineList">
+        <item>VAR</item>
+        <item>DTaP</item>
+        <item>Hib</item>
+        <item>HepA</item>
+        <item>HepB</item>
+        <item>IIV</item>
+        <item>MMR</item>
+        <item>MMR</item>
+        <item>DTaP</item>
+        <item>IPV</item>
+        <item>PCV13</item>
+        <item>RV</item>
+        <item>MMR</item>
+        <item>DTaP</item>
+
     </string-array>
 
-    <string-array name="vaccineList">
-        <item>HepB</item>
-        <item>RV</item>
-        <item>DTaP</item>
-        <item>Tdap</item>
-        <item>Hib</item>
-        <item>PCV13</item>
-        <item>PPSV23</item>
-        <item>IPV</item>
-        <item>IIV;&amp;or&amp;LAIV</item>
-        <item>MMR</item>
-        <item>VAR</item>
-        <item>HepA</item>
-        <item>HPV</item>
-        <item>MCV4</item>
-
+    <string-array name="doseMonths">
+        <item>12-15&amp;month,4-6&amp;year</item>
+        <item>2&amp;month,4&amp;month,6&amp;month,15-18&amp;month,4-6&amp;year</item>
+        <item>2&amp;month,4&amp;month,6&amp;month,12-15&amp;month</item>
+        <item>12&amp;month,18-23&amp;month</item>
+        <item>birth&amp;month,1-2&amp;month,6-18&amp;month</item>
+        <item>annual&amp;vaccination</item>
+        <item>12-15&amp;month,4-6&amp;year</item>
+        <item>12-15&amp;month,4-6&amp;year</item>
+        <item>2&amp;month,4&amp;month,6&amp;month,15-18&amp;month,4-6&amp;year</item>
+        <item>2&amp;month,4&amp;month,6-18&amp;month,4-6&amp;year</item>
+        <item>2&amp;month,4&amp;month,6&amp;month,12-15&amp;month</item>
+        <item>2&amp;month,4&amp;month</item>
+        <item>12-15&amp;month,4-6&amp;year</item>
+        <item>2&amp;month,4&amp;month,6&amp;month,15-18&amp;month,4-6&amp;year</item>
+        
     </string-array>
 
     <string-array name="diseaseComplications">
