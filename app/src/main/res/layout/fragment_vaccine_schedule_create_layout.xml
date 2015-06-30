@@ -4,151 +4,160 @@
     android:layout_height="match_parent"
     android:orientation="vertical"
     android:padding="5dp">
-
-    <LinearLayout
-        android:id="@+id/dn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:background="@drawable/layout_background_drawable"
-        android:clickable="false"
-        android:focusable="false"
-        android:orientation="vertical">
-
-        <TextView
+<ScrollView
+    android:layout_width="match_parent"
+    android:layout_height="fill_parent"
+    android:layout_above="@+id/saveVaccineSchedule">
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
+        <LinearLayout
+            android:id="@+id/dn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="Disease Name"
-            android:textAppearance="?android:attr/textAppearanceLargeInverse"
-            android:textColor="#7E354D" />
+            android:background="@drawable/layout_background_drawable"
+            android:clickable="false"
+            android:focusable="false"
+            android:orientation="vertical">
 
-        <TextView
-            android:id="@+id/diseaseName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="Not set"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Disease Name"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                android:textColor="#7E354D" />
 
-    <LinearLayout
-        android:id="@+id/vn"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/dn"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/layout_background_drawable"
-        android:clickable="false"
-        android:focusable="false"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="Vaccine Name"
-            android:textAppearance="?android:attr/textAppearanceLargeInverse"
-            android:textColor="#7E354D" />
-
-        <TextView
-            android:id="@+id/vaccineName"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="Not set"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/vd"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/vn"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/layout_background_drawable"
-        android:orientation="vertical">
-
-        <TextView
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="Vaccine Doses"
-            android:textAppearance="?android:attr/textAppearanceLargeInverse"
-            android:textColor="#7E354D" />
+            <TextView
+                android:id="@+id/diseaseName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Not set"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
 
         <LinearLayout
-            android:id="@+id/vaccineDoses"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:orientation="vertical" />
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/vdd"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/vd"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/layout_background_drawable"
-        android:clickable="true"
-        android:focusable="true"
-        android:orientation="vertical">
-
-        <TextView
+            android:id="@+id/vn"
             android:layout_width="fill_parent"
             android:layout_height="wrap_content"
+            android:layout_below="@+id/dn"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/layout_background_drawable"
             android:clickable="false"
             android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="Vaccination Date"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Vaccine Name"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                android:textColor="#7E354D" />
+
+            <TextView
+                android:id="@+id/vaccineName"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Not set"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vn"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/layout_background_drawable"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Vaccine Doses"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                android:textColor="#7E354D" />
+
+            <LinearLayout
+                android:id="@+id/vaccineDoses"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:orientation="vertical" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/vdd"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vd"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/layout_background_drawable"
+            android:clickable="true"
+            android:focusable="true"
+            android:orientation="vertical">
+
+            <TextView
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Vaccination Date"
+                android:textAppearance="?android:attr/textAppearanceLargeInverse"
+                android:textColor="#7E354D" />
+
+            <TextView
+                android:id="@+id/vaccineDate"
+                android:layout_width="fill_parent"
+                android:layout_height="wrap_content"
+                android:clickable="false"
+                android:focusable="false"
+                android:focusableInTouchMode="false"
+                android:paddingBottom="5dp"
+                android:paddingLeft="5dp"
+                android:paddingTop="5dp"
+                android:text="Not set"
+                android:textAppearance="?android:attr/textAppearanceMedium" />
+        </LinearLayout>
+
+        <CheckedTextView
+            android:id="@+id/reminder"
+            android:layout_width="fill_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@+id/vdd"
+            android:layout_marginTop="8dp"
+            android:background="@drawable/layout_background_drawable"
+            android:checkMark="@android:drawable/checkbox_off_background"
+            android:gravity="center_vertical"
+            android:text="Reminder"
             android:textAppearance="?android:attr/textAppearanceLargeInverse"
             android:textColor="#7E354D" />
+    </RelativeLayout>
+</ScrollView>
 
-        <TextView
-            android:id="@+id/vaccineDate"
-            android:layout_width="fill_parent"
-            android:layout_height="wrap_content"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"
-            android:paddingBottom="5dp"
-            android:paddingLeft="5dp"
-            android:paddingTop="5dp"
-            android:text="Not set"
-            android:textAppearance="?android:attr/textAppearanceMedium" />
-    </LinearLayout>
-
-    <CheckedTextView
-        android:id="@+id/reminder"
-        android:layout_width="fill_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/vdd"
-        android:layout_marginTop="8dp"
-        android:background="@drawable/layout_background_drawable"
-        android:checkMark="@android:drawable/checkbox_off_background"
-        android:gravity="center_vertical"
-        android:text="Reminder"
-        android:textAppearance="?android:attr/textAppearanceLargeInverse"
-        android:textColor="#7E354D" />
 
     <LinearLayout
         android:id="@+id/saveVaccineSchedule"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/reminder"
+        android:layout_alignParentBottom="true"
         android:layout_marginTop="8dp"
         android:background="@drawable/button_layout_background"
         android:clickable="true"
