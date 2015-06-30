@@ -57,13 +57,13 @@ public class DietListAdapter extends ArrayAdapter {
                         break;
                     case R.id.removeDiet:
                         if (ApplicationMain.getDatabase().removeDiet(dietInformation.getId()) > 0) {
-                            int alarmId = ApplicationMain.getDatabase().getAlarmByDietId(String.valueOf(dietInformation.getId()));
+                            int alarmId = ApplicationMain.getDatabase().getAlarmId(String.valueOf(dietInformation.getId()), DietInformation.ALARM_KEY_DIET);
 
                             if (alarmId > -1) {
                                 Intent alarmReceiver = new Intent(context, AlarmReceiver.class);
                                 PendingIntent dietIntent = PendingIntent.getBroadcast(context, dietInformation.getId(), alarmReceiver, 0);
                                 ApplicationMain.getAlarmManager().cancel(dietIntent);
-                                ApplicationMain.getDatabase().removeAlarm(String.valueOf(dietInformation.getId()));
+                                ApplicationMain.getDatabase().removeAlarm(String.valueOf(dietInformation.getId()),DietInformation.ALARM_KEY_DIET);
                             }
                             notifyDataSetChanged();
                         }

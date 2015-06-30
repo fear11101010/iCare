@@ -10,6 +10,7 @@ public class DoctorProfile {
     private String chamber;
     private String email;
     private String contactNo;
+    private static final String ALARM_KEY_DOCTOR="doctor";
     private int id;
 
     public String getName() {

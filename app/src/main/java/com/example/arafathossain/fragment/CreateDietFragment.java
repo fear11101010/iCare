@@ -48,8 +48,6 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
     CheckedTextView reminder;
     OnDietCreateListener onDietCreateListener;
     DietInformation dietInformation;
-    public static final String ALARM_KEY_DIET = "diet";
-    public static final String ALARM_KEY_APPOINTMENT = "doctorAppointment";
     boolean[] checkItem = {false, false, false, false, false, false, false};
 
     public static CreateDietFragment getInstance(String profileTitle) {
@@ -361,10 +359,11 @@ public class CreateDietFragment extends DialogFragment implements View.OnClickLi
             reminderTimeInMills += 7 * 24 * 60 * 60 * 1000;
             Log.d("reminder", "less");
         }
-        int alarmId = ApplicationMain.getDatabase().addAlarmInformation(new Reminder(ALARM_KEY_DIET,String.valueOf(id),getActivity().getIntent().getStringExtra("profileId")));
+        int alarmId = ApplicationMain.getDatabase().addAlarmInformation(new Reminder(DietInformation.ALARM_KEY_DIET,String.valueOf(id),getActivity().getIntent().getStringExtra("profileId")));
         if (alarmId>-1) {
             Log.d("ppppp",alarmId+"");
             Intent alarmReceiver = new Intent(getActivity(), AlarmReceiver.class);
+            alarmReceiver.setAction(DietInformation.ACTION_DIET);
             alarmReceiver.putExtra("title", titleView.getText());
             alarmReceiver.putExtra("day", repeatView.getText());
             alarmReceiver.putExtra("menu", menuView.getText());

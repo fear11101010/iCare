@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    android:padding="10dp">
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Image Width(px)"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/imageWidth"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal" />
+
+    <TextView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Image Height(px)"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="#000000" />
+
+    <EditText
+        android:id="@+id/imageHeight"
+        android:layout_width="fill_parent"
+        android:layout_height="wrap_content"
+        android:inputType="numberDecimal" />
+
+    <CheckBox
+        android:id="@+id/cp"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:padding="10dp"
+        android:text="Constant Proportion"
+        android:textAppearance="?android:attr/textAppearanceLargeInverse"
+        android:textColor="#000000" />
+</LinearLayout>

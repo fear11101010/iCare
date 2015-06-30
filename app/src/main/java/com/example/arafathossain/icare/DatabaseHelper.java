@@ -8,8 +8,6 @@ import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
 
-import com.example.arafathossain.fragment.CreateDietFragment;
-
 import java.util.ArrayList;
 
 public class DatabaseHelper extends SQLiteOpenHelper {
@@ -27,6 +25,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DietTable.CREATE_TABLE_QUERY);
         db.execSQL(DoctorProfileTable.CREATE_TABLE_QUERY);
         db.execSQL(AlarmTable.CREATE_TABLE_QUERY);
+        db.execSQL(VaccineTable.CREATE_TABLE_QUERY);
     }
 
     @Override
@@ -35,6 +34,8 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         db.execSQL(DietTable.DROP_TABLE_QUERY);
         db.execSQL(DoctorProfileTable.DROP_TABLE_QUERY);
         db.execSQL(AlarmTable.DROP_TABLE_QUERY);
+        db.execSQL(VaccineTable.DROP_TABLE_QUERY);
+        db.execSQL(VaccineTable.CREATE_TABLE_QUERY);
         db.execSQL(AlarmTable.CREATE_TABLE_QUERY);
         db.execSQL(ProfileTable.CREATE_TABLE_QUERY);
         db.execSQL(DietTable.CREATE_TABLE_QUERY);
@@ -157,14 +158,48 @@ public class DatabaseHelper extends SQLiteOpenHelper {
 
         return (int) db.insert(DietTable.TABLE_NAME, null, values);
     }
+    public int addVaccineInformation(VaccineDetail detail) {
+        SQLiteDatabase db = getWritableDatabase();
+        ContentValues values = new ContentValues();
+        values.put(VaccineTable.COLUMN_DATE, detail.getDate());
+        values.put(VaccineTable.COLUMN_DISEASE_NAME, detail.getDiseaseName());
+        values.put(VaccineTable.COLUMN_PROFILE_ID, detail.getProfileId());
+        values.put(VaccineTable.COLUMN_DOSE_NO, detail.getDoseNo());
+        values.put(VaccineTable.COLUMN_REMINDER, detail.getReminder());
+        values.put(VaccineTable.COLUMN_STATUS,detail.getStatus());
+        values.put(VaccineTable.COLUMN_VACCINE_NAME,detail.getVaccineName());
+
+        return (int) db.insert(VaccineTable.TABLE_NAME, null, values);
+    }
+    public ArrayList<VaccineDetail> getVaccineList(String profileId){
+        SQLiteDatabase db = getReadableDatabase();
+        Cursor cursor = db.query(VaccineTable.TABLE_NAME,null,VaccineTable.COLUMN_PROFILE_ID+"=?",new String[]{profileId},null,null,null);
+        ArrayList<VaccineDetail> vaccineDetails = null;
+        if (cursor.moveToFirst()){
+            vaccineDetails = new ArrayList<>();
+            do {
+                VaccineDetail detail = new VaccineDetail();
+                detail.setReminder(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_REMINDER)));
+                detail.setDiseaseName(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_DISEASE_NAME)));
+                detail.setVaccineName(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_VACCINE_NAME)));
+                detail.setDate(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_DATE)));
+                detail.setDoseNo(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_DOSE_NO)));
+                detail.setStatus(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_STATUS)));
+                detail.setId(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_ID)));
+            }while (cursor.moveToNext());
+        }
+        return vaccineDetails;
+    }
+
     public int addAlarmInformation(Reminder reminder) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
         values.put(AlarmTable.COLUMN_ALARM_KEY, reminder.getKey());
         values.put(AlarmTable.COLUMN_KEY_ID, reminder.getKeyId());
-        values.put(AlarmTable.COLUMN_PROFILE_ID,reminder.getProfileId());
+        values.put(AlarmTable.COLUMN_PROFILE_ID, reminder.getProfileId());
         return (int) db.insert(AlarmTable.TABLE_NAME, null, values);
     }
+
     public int updateDiet(ContentValues values, int id) {
         SQLiteDatabase db = getWritableDatabase();
         return db.update(DietTable.TABLE_NAME, values, DietTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
@@ -196,20 +231,23 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(DietTable.TABLE_NAME, DietTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
     }
-    public int removeAlarm(String dietId) {
+
+    public int removeAlarm(String id, String key) {
         SQLiteDatabase db = getWritableDatabase();
-        return db.delete(AlarmTable.TABLE_NAME, AlarmTable.COLUMN_KEY_ID + "=? AND "+AlarmTable.COLUMN_ALARM_KEY+"=?", new String[]{dietId, CreateDietFragment.ALARM_KEY_DIET});
+        return db.delete(AlarmTable.TABLE_NAME, AlarmTable.COLUMN_KEY_ID + "=? AND " + AlarmTable.COLUMN_ALARM_KEY + "=?", new String[]{id, key});
     }
-    public int getAlarmByDietId(String dietId) {
+
+    public int getAlarmId(String id, String key) {
         SQLiteDatabase db = getReadableDatabase();
         int alarmId = -1;
-        Cursor cursor = db.query(AlarmTable.TABLE_NAME, new String[]{AlarmTable.COLUMN_ID}, AlarmTable.COLUMN_KEY_ID + "=? AND "+AlarmTable.COLUMN_ALARM_KEY+"=?", new String[]{dietId, CreateDietFragment.ALARM_KEY_DIET}, null, null, null);
+        Cursor cursor = db.query(AlarmTable.TABLE_NAME, new String[]{AlarmTable.COLUMN_ID}, AlarmTable.COLUMN_KEY_ID + "=? AND " + AlarmTable.COLUMN_ALARM_KEY + "=?", new String[]{id, key}, null, null, null);
         if (cursor.moveToFirst()) {
             alarmId = cursor.getInt(cursor.getColumnIndex(AlarmTable.COLUMN_ID));
         }
         cursor.close();
         return alarmId;
     }
+
     public int addDoctorProfile(DoctorProfile profile) {
         SQLiteDatabase db = getWritableDatabase();
         ContentValues values = new ContentValues();
@@ -270,6 +308,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 COLUMN_DAY + " TEXT," +
                 COLUMN_REMINDER + " TEXT)";
         public static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;
+    }
+    public int removeDoctorProfile(String id){
+        SQLiteDatabase db = getWritableDatabase();
+        return db.delete(DoctorProfileTable.TABLE_NAME,DoctorProfileTable.COLUMN_ID+"=?",new String[]{id});
     }
 
     public class ProfileTable {
@@ -337,8 +379,30 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         public static final String COLUMN_PROFILE_ID = "profile_id";
 
         public static final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
-                "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," +COLUMN_KEY_ID+" INTEGER,"+COLUMN_PROFILE_ID+" INTEGER,"+
+                "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_KEY_ID + " INTEGER," + COLUMN_PROFILE_ID + " INTEGER," +
                 COLUMN_ALARM_KEY + " TEXT)";
+
+
+        public static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;
+
+    }
+    public class VaccineTable {
+        public static final String TABLE_NAME = "vaccine_schedule";
+        public static final String COLUMN_DISEASE_NAME = "disease_name";
+        public static final String COLUMN_ID = "id";
+        public static final String COLUMN_VACCINE_NAME = "vaccine_name";
+        public static final String COLUMN_PROFILE_ID = "profile_id";
+        public static final String COLUMN_REMINDER = "reminder";
+        public static final String COLUMN_DOSE_NO = "dose_no";
+        public static final String COLUMN_DATE = "date";
+        public static final String COLUMN_STATUS = "status";
+
+        public static final String CREATE_TABLE_QUERY = "CREATE TABLE IF NOT EXISTS " + TABLE_NAME +
+                "(" + COLUMN_ID + " INTEGER PRIMARY KEY AUTOINCREMENT," + COLUMN_DOSE_NO + " INTEGER," + COLUMN_PROFILE_ID + " INTEGER," +
+                COLUMN_DISEASE_NAME + " TEXT,"+
+                COLUMN_VACCINE_NAME + " TEXT,"+
+                COLUMN_DATE + " TEXT,"+COLUMN_STATUS + " TEXT,"+
+                COLUMN_REMINDER + " TEXT)";
 
 
         public static final String DROP_TABLE_QUERY = "DROP TABLE IF EXISTS " + TABLE_NAME;

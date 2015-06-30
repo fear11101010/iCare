@@ -172,4 +172,5 @@
 
     </string-array>
     <string name="title_activity_profile_detail">ProfileDetailActivity</string>
+    <string name="title_activity_image_editor">ImageEditor</string>
 </resources>

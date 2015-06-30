@@ -13,20 +13,12 @@ import android.widget.ListView;
 import com.example.arafathossain.icare.R;
 
 
-public class DoctorAppointmentFragment extends DialogFragment implements View.OnClickListener{
+public class DoctorAppointmentFragment extends DialogFragment{
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_doctor_appointment_layout, container, false);
         ListView appointmentList = (ListView) view.findViewById(R.id.appointmentList);
-        View newAppointment = view.findViewById(R.id.newAppointment);
-        newAppointment.setOnClickListener(this);
         return view;
-    }
-
-    @Override
-    public void onClick(View v) {
-        FragmentManager fragmentManager = getActivity().getSupportFragmentManager();
-        new DoctorNewAppointmentFragment().show(fragmentManager,"newAppointment");
     }
 }

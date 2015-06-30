@@ -1,24 +1,25 @@
 <?xml version="1.0" encoding="utf-8"?>
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
-    package="com.example.arafathossain.icare">
+    package="com.example.arafathossain.icare" >
 
-    <uses-permission android:name="ANDROID.PERMISSION.WAKE_LOCK" />
+    <uses-permission android:name="android.permission.WAKE_LOCK" />
     <uses-permission android:name="android.permission.CAMERA" />
 
     <uses-feature android:name="android.hardware.camera2" />
 
-    <uses-permission android:name="ANDROID.PERMISSION.WRITE_EXTERNAL_STORAGE" />
-    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
+    <uses-permission android:name="android.permission.CALL_PHONE"/>
+
+    <uses-permission android:name="android.permission.SEND_SMS"/>
 
     <application
         android:name=".ApplicationMain"
         android:allowBackup="true"
         android:icon="@mipmap/icare_icon"
         android:label="@string/app_name"
-        android:theme="@style/AppTheme">
+        android:theme="@style/AppTheme" >
         <activity
             android:name=".MainActivity"
-            android:label="@string/app_name">
+            android:label="@string/app_name" >
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -28,11 +29,25 @@
         <activity
             android:name=".CreateProfileActivity"
             android:label="@string/new_profile_activity" />
-        <activity android:name=".ProfileDetailActivity"/>
+        <activity android:name=".ProfileDetailActivity" />
 
         <receiver
             android:name=".AlarmReceiver"
-            android:enabled="true" />
+            android:enabled="true" >
+            <intent-filter>
+                <action android:name="diet" />
+            </intent-filter>
+            <intent-filter>
+                <action android:name="vaccine" />
+            </intent-filter>
+        </receiver>
+
+        <activity
+            android:name=".ImageEditorActivity"
+            android:label="@string/title_activity_image_editor" >
+        </activity>
     </application>
+    <uses-permission android:name="ANDROID.PERMISSION.WRITE_EXTERNAL_STORAGE" />
+    <uses-permission android:name="ANDROID.PERMISSION.READ_EXTERNAL_STORAGE" />
 
 </manifest>

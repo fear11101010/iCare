@@ -8,7 +8,8 @@ public class DietInformation {
     private String menu;
     private int id;
     private String profileId;
-
+    public static final String ALARM_KEY_DIET="diet";
+    public static final String ACTION_DIET="diet";
     public DietInformation() {
     }
 

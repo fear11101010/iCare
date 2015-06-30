@@ -16,33 +16,33 @@
         android:layout_height="wrap_content"
         android:layout_alignParentBottom="true"
         android:background="@drawable/button_layout_background"
+        android:clickable="true"
+        android:focusable="true"
         android:gravity="center_horizontal"
+        android:onClick="showAppointmentCreate"
         android:orientation="horizontal"
         android:paddingBottom="10dp"
-        android:paddingTop="10dp"
-        android:clickable="true"
-
-        android:focusable="true">
+        android:paddingTop="10dp">
 
         <ImageView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:src="@drawable/add_icon"
             android:clickable="false"
             android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:focusableInTouchMode="false"
+            android:src="@drawable/add_icon" />
 
         <TextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:clickable="false"
+            android:focusable="false"
+            android:focusableInTouchMode="false"
             android:paddingBottom="8dp"
             android:paddingLeft="10dp"
             android:paddingRight="10dp"
             android:paddingTop="8dp"
-            android:textColor="#FFFFFF"
             android:text="New Appointment"
-            android:clickable="false"
-            android:focusable="false"
-            android:focusableInTouchMode="false"/>
+            android:textColor="#FFFFFF" />
     </LinearLayout>
 </RelativeLayout>
