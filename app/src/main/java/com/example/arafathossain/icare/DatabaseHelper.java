@@ -188,6 +188,7 @@ public class DatabaseHelper extends SQLiteOpenHelper {
                 detail.setId(cursor.getString(cursor.getColumnIndex(VaccineTable.COLUMN_ID)));
             }while (cursor.moveToNext());
         }
+        cursor.close();
         return vaccineDetails;
     }
 
@@ -226,7 +227,10 @@ public class DatabaseHelper extends SQLiteOpenHelper {
         cursor.close();
         return dietList;
     }
-
+    public int updateDotorProfile(ContentValues values, int id) {
+        SQLiteDatabase db = getWritableDatabase();
+        return db.update(DoctorProfileTable.TABLE_NAME, values, DoctorProfileTable.COLUMN_ID+"=?", new String[]{String.valueOf(id)});
+    }
     public int removeDiet(int id) {
         SQLiteDatabase db = getWritableDatabase();
         return db.delete(DietTable.TABLE_NAME, DietTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
@@ -271,25 +275,25 @@ public class DatabaseHelper extends SQLiteOpenHelper {
     public ArrayList<DoctorProfile> getAllDoctorProfile() {
         ArrayList<DoctorProfile> profiles = null;
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.query(DoctorProfileTable.TABLE_NAME, new String[]{DoctorProfileTable.COLUMN_DOCTOR_NAME, DoctorProfileTable.COLUMN_ID}, null, null, null, null, null);
+        Cursor cursor = db.query(DoctorProfileTable.TABLE_NAME, null, null, null, null, null, null);
         if (cursor.moveToFirst()) {
             profiles = new ArrayList<>();
             do {
                 DoctorProfile profile = new DoctorProfile();
                 profile.setId(cursor.getInt(cursor.getColumnIndex(DoctorProfileTable.COLUMN_ID)));
                 profile.setName(cursor.getString(cursor.getColumnIndex(DoctorProfileTable.COLUMN_DOCTOR_NAME)));
+                profile.setDesignation(cursor.getString(cursor.getColumnIndex(DoctorProfileTable.COLUMN_DESIGNATION)));
+                profile.setDegree(cursor.getString(cursor.getColumnIndex(DoctorProfileTable.COLUMN_DEGREE_ACHIEVED)));
+                profile.setEmail(cursor.getString(cursor.getColumnIndex(DoctorProfileTable.COLUMN_EMAIL)));
+                profile.setContactNo(cursor.getString(cursor.getColumnIndex(DoctorProfileTable.COLUMN_CONTACT_NO)));
+                profile.setChamber(cursor.getString(cursor.getColumnIndex(DoctorProfileTable.COLUMN_CHAMBER_ADDRESS)));
+                profile.setWorkPlace(cursor.getString(cursor.getColumnIndex(DoctorProfileTable.COLUMN_WORKPLACE)));
                 profiles.add(profile);
             } while (cursor.moveToNext());
         }
         cursor.close();
         return profiles;
     }
-
-    public int removeDoctorProfile(int id) {
-        SQLiteDatabase db = getWritableDatabase();
-        return db.delete(DoctorProfileTable.TABLE_NAME, DoctorProfileTable.COLUMN_ID + "=?", new String[]{String.valueOf(id)});
-    }
-
     public class DietTable {
         public static final String COLUMN_TIME = "time";
         public static final String COLUMN_PROFILE_ID = "profile_id";

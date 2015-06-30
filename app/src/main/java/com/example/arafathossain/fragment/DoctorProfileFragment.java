@@ -1,5 +1,6 @@
 package com.example.arafathossain.fragment;
 
+import android.app.Activity;
 import android.app.AlertDialog;
 import android.content.DialogInterface;
 import android.content.Intent;
@@ -28,6 +29,10 @@ public class DoctorProfileFragment extends Fragment implements SwipeRefreshLayou
     private SwipeRefreshLayout refreshLayout;
     private ListView doctorProfileList;
     private String[] actionList={"Call Doctor","SMS Doctor","Email Doctor","View Detail","Remove Profile"};
+    public interface ShowDoctorProfileListener{
+        void showProfile(DoctorProfile profile);
+    }
+    ShowDoctorProfileListener listener;
 
     @Nullable
     @Override
@@ -93,6 +98,7 @@ public class DoctorProfileFragment extends Fragment implements SwipeRefreshLayou
                         startActivity(Intent.createChooser(email, "Choose an Email client :"));
                         break;
                     case 3:
+                        listener.showProfile(profile);
                         break;
                     case 4:
                         if (ApplicationMain.getDatabase().removeDoctorProfile(String.valueOf(profile.getId()))>0) {
@@ -105,5 +111,11 @@ public class DoctorProfileFragment extends Fragment implements SwipeRefreshLayou
         });
         builder.setTitle("Choose an action");
         builder.create().show();
+    }
+
+    @Override
+    public void onAttach(Activity activity) {
+        super.onAttach(activity);
+        listener = (ShowDoctorProfileListener)activity;
     }
 }

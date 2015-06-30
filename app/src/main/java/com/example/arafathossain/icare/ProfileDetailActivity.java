@@ -30,6 +30,8 @@ import com.example.arafathossain.fragment.DiseaseListFragment;
 import com.example.arafathossain.fragment.DoctorChamberAddressFragment;
 import com.example.arafathossain.fragment.DoctorManagementFragment;
 import com.example.arafathossain.fragment.DoctorNewAppointmentFragment;
+import com.example.arafathossain.fragment.DoctorProfileDetailFragment;
+import com.example.arafathossain.fragment.DoctorProfileFragment;
 import com.example.arafathossain.fragment.GeneralInformationFragment;
 import com.example.arafathossain.fragment.HomeProfileDetailFragment;
 import com.example.arafathossain.fragment.VaccinationInformationFragment;
@@ -44,7 +46,7 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 
-public class ProfileDetailActivity extends AppCompatActivity implements DoctorNewAppointmentFragment.ImageChooserListener, DiseaseListFragment.OnVaccineScheduleCreateListener, DoctorChamberAddressFragment.OnAddressCreateListener, OnUpdateListener, HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
+public class ProfileDetailActivity extends AppCompatActivity implements DoctorProfileFragment.ShowDoctorProfileListener, DoctorNewAppointmentFragment.ImageChooserListener, DiseaseListFragment.OnVaccineScheduleCreateListener, DoctorChamberAddressFragment.OnAddressCreateListener, OnUpdateListener, HomeProfileDetailFragment.OnLayoutButtonClickListener, AdapterView.OnItemClickListener, OnDietCreateListener {
     private static final int HOME_FRAGMENT = 1;
     private static final int DIET_FRAGMENT = 2;
     private static final int CREATE_DIET_FRAGMENT = 4;
@@ -378,6 +380,7 @@ private OnImageSaveListener imageSaveListener;
         FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
         fragmentTransaction.replace(R.id.fragmentContainer, fragment);
         fragmentTransaction.addToBackStack(HOME_FRAGMENT_TAG);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
         fragmentTransaction.commit();
     }
 
@@ -432,5 +435,16 @@ private OnImageSaveListener imageSaveListener;
         }
 
         return Uri.fromFile(file);
+    }
+
+    @Override
+    public void showProfile(DoctorProfile profile) {
+        Fragment fragment = DoctorProfileDetailFragment.getInstance(profile);
+        FragmentManager fragmentManager = getSupportFragmentManager();
+        FragmentTransaction fragmentTransaction = fragmentManager.beginTransaction();
+        fragmentTransaction.replace(R.id.fragmentContainer, fragment);
+        fragmentTransaction.addToBackStack(HOME_FRAGMENT_TAG);
+        fragmentTransaction.setTransition(FragmentTransaction.TRANSIT_FRAGMENT_OPEN);
+        fragmentTransaction.commit();
     }
 }
